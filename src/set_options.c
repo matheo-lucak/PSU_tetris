@@ -77,10 +77,10 @@ bolean_t set_game_option(option_t *options, char option, char *arg)
 
     if (!option)
         return (FALSE);
-    index = find_char("DW", option);
+    index = find_char("Dw", option);
     if (index == -1)
         return (FALSE);
-    options->game_option |= my_pow(index + 1, 2);
-    my_printf("Option %c set bit %d\n", option, my_pow(index + 1, 2));
+    options->game_option |= my_pow(2, index);
+    my_printf("Option %c set bit %d\n", option, my_pow(2, index));
     return (TRUE);
 }

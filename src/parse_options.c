@@ -26,8 +26,10 @@ bolean_t parse_option(const int ac, char * const av[], option_t *options)
         index = find_char("LlrtdqpswD", check);
         if (index == -1)
             continue;
-        if (!set_option_func[index](options, check, optarg))
+        if (!set_option_func[index](options, check, optarg)) {
+            my_printf("%s is bad argument for option %c\n", optarg, check);
             return (FALSE);
+        }
     } while (check != -1);
     return (TRUE);
 }
