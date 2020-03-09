@@ -5,24 +5,20 @@
 ** main
 */
 
-#include <unistd.h>
+#include "my.h"
 #include "tetris.h"
 
-int tetris(const char * const input[])
+
+
+int tetris(const int ac, char * const av[])
 {
     option_t options;
-    int index = 0;
-
-    if (!input)
-        return (84);
-    while (input[index]) {
-        index += 1;
-    }
+    return (0);
 }
 
-int main(const int ac, const char * const av [])
+int main(const int ac, char * const av [])
 {
     if (ac < 2)
         return (84);
-    return (tetris(av + 1));
+    return (tetris(ac, av));
 }

@@ -5,13 +5,11 @@
 ## Compiling mmmmh ? Good idea
 ##
 
-MAIN				=	src/main.c
+MAIN				=	src/main.c			\
 
-SRC					=
+SRC					=	src/parse_options.c	 \
 
-SRC_OTHER			=	src/usage.c
-
-OBJ					=	$(MAIN:.c=.o) $(SRC)
+OBJ					=	$(MAIN:.c=.o) $(SRC:.c=.o)
 
 NAME 				=	tetris
 
