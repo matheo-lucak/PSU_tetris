@@ -43,11 +43,13 @@ typedef enum option_flag_e {
 } option_flag_t;
 
 typedef struct option_s {
-    unsigned int options : 2;
+    unsigned int level;
+    unsigned int game_option : 2;
     vector2i_t map_size;
     char control_keys[4];
     char option_keys[2];
 } option_t;
 
+bolean_t parse_option(const int ac, char * const av[], option_t *options);
 
 #endif /* !TETRIS_H_ */

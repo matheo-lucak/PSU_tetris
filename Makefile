@@ -8,6 +8,7 @@
 MAIN				=	src/main.c			\
 
 SRC					=	src/parse_options.c	 \
+						src/set_options.c	 \
 
 OBJ					=	$(MAIN:.c=.o) $(SRC:.c=.o)
 

@@ -13,6 +13,10 @@
 int tetris(const int ac, char * const av[])
 {
     option_t options;
+
+    my_memset((char *)&options, 0, sizeof(option_t));
+    if (!parse_option(ac, av, &options))
+        return (84);
     return (0);
 }
 
