@@ -42,6 +42,7 @@ SRC	=			./my_putchar.c						\
 				./my_strcat.c						\
 				./my_str_to_word_array.c			\
 				./find_char_in_str.c				\
+				./find_char.c						\
 				./get_next_line.c					\
 				./my_memset.c						\
 				./my_absolute_getnbr.c

@@ -11,7 +11,11 @@
 
 #include <unistd.h>
 
+//Returns 1 if the char is found else returns 0
 int find_char_in_str(const char *str, const char c);
+//Returns the index of str where to_find is found
+//Returns -1 if to_find is not found
+int find_char(const char *str, char to_find);
 
 int my_putchar(const char c);
 int my_putstr(const char *str);

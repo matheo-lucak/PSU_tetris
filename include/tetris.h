@@ -11,6 +11,12 @@
 #include <stdbool.h>
 #include <stddef.h>
 
+typedef enum bolean_e
+{
+    FALSE,
+    TRUE
+} bolean_t;
+
 //Defines the position of a 2d int vector.
 typedef struct vector2i_s {
     long int x;
@@ -45,12 +51,14 @@ typedef enum option_flag_e {
 } option_flag_t;
 
 typedef struct option_s {
-    unsigned int options : 2;
+    unsigned int level;
+    unsigned int game_option : 2;
     vector2i_t map_size;
-    char control_keys[3];
-    char option_keys[3];
+    char control_keys[4];
+    char option_keys[2];
 } option_t;
 
+bolean_t parse_option(const int ac, char * const av[], option_t *options);
 
 /*
 ** ***********************
