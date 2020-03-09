@@ -36,7 +36,7 @@ typedef enum shape_valid_e {
 } shape_valid_t;
 
 //A tetrimino characteristics.
-typedef struct tetrimino_s {
+typedef struct __attribute__((packed))tetrimino_s {
     char **shape;
     char *name;
     dimensions_t dims;
@@ -50,7 +50,7 @@ typedef enum option_flag_e {
     NEXT = 2
 } option_flag_t;
 
-typedef struct option_s {
+typedef struct __attribute__((packed))option_s {
     unsigned int level;
     unsigned int game_option : 2;
     vector2i_t map_size;
@@ -83,6 +83,16 @@ bool read_tetriminos_dir(tetrimino_t **head);
 //Returns 0 otherwise.
 bool get_tetrimino(tetrimino_t *node, const char file_name[]);
 
+//Free's allocated memory of a tetrimino list with memory checkers before
+//freeing.
+void free_tetriminos_list(tetrimino_t *head);
+
+//Checks if a file_name as a certain given extension.
+//
+//Returns 1 if it has.
+//Returns 0 otherwise.
+bool file_extension_determ(const char file_name[], const char extension[]);
+
 
 /*
 ** ******************
@@ -95,7 +105,7 @@ bool get_tetrimino(tetrimino_t *node, const char file_name[]);
 //Returns 84 if an error occurs.
 //Returns 0 otherwise.
 
-int tetris(const int ac, const char * const av[]);
+int tetris(const int ac, char * const av[]);
 
 
 #endif /* !TETRIS_H_ */

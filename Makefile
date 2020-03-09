@@ -5,10 +5,16 @@
 ## Compiling mmmmh ? Good idea
 ##
 
-MAIN				=	src/main.c				\
+MAIN				=	src/main.c										\
 
-SRC					=	src/parse_options.c		\
-						src/set_options.c		\
+SRC					=	src/parse_options.c								\
+						src/set_options.c								\
+						src/tetriminos_handling/read_tetriminos_dir.c	\
+						src/tetriminos_handling/get_tetriminos.c		\
+						src/tetriminos_handling/free_tetriminos_list.c	\
+						src/tetriminos_handling/file_extension_determ.c	\
+
+SRC_TESTS			=	tests/test_file_extension_determ.c				\
 
 OBJ					=	$(MAIN:.c=.o) $(SRC:.c=.o)
 
@@ -39,7 +45,7 @@ debug:					clean $(LIB) $(OBJ)
 tests_run:				LDLIBS += -lcriterion --coverage
 tests_run:				CFLAGS += --coverage
 tests_run:				$(LIB)
-						$(CC) -o $@ $(SRC) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS)
+						$(CC) -o $@ $(SRC) $(SRC_TESTS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS)
 						./$@
 						mv *.gc* tests/
 						$(RM) $@
@@ -48,9 +54,14 @@ clean:
 						$(RM) $(OBJ)
 						$(MAKE) -C lib/my clean
 
-fclean:					clean
+fclean:
 						$(RM) $(NAME)
+						$(RM) debug
+						$(RM) tests_run
 						$(RM) $(OBJ)
+						find . -type f -name '*.gcno' -exec rm {} +
+						find . -type f -name '*.gcda' -exec rm {} +
+						find . -type f -name 'vgcore.*' -exec rm {} +
 						$(MAKE) -C lib/my fclean
 
 re:			 			fclean all
