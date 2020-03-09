@@ -66,7 +66,8 @@ bolean_t set_map_size(option_t *options, char option, char *arg)
         my_free_arr((void **)parsed_input);
         return (FALSE);
     }
-    my_printf("Option %c set size to %d, %d\n", option, options->map_size.x, options->map_size.y);
+    my_printf("Option %c set size to %d, %d\n", option,
+                            options->map_size.x, options->map_size.y);
     return (TRUE);
 }
 
@@ -80,5 +81,6 @@ bolean_t set_game_option(option_t *options, char option, char *arg)
     if (index == -1)
         return (FALSE);
     options->game_option |= my_pow(index + 1, 2);
+    my_printf("Option %c set bit %d\n", option, my_pow(index + 1, 2));
     return (TRUE);
 }
