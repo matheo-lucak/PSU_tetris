@@ -8,8 +8,6 @@
 #include "my.h"
 #include "tetris.h"
 
-
-
 int tetris(const int ac, char * const av[])
 {
     option_t options;

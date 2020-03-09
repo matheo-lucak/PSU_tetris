@@ -9,8 +9,7 @@
 
 int my_absolute_getnbr(const char *str)
 {
-    int index = 0;
-    int neg = 1;
+    register size_t index = 0;
     int nb = 0;
 
     if (!my_str_is_num(str))
@@ -21,5 +20,5 @@ int my_absolute_getnbr(const char *str)
         nb += str[index] - 48;
         index += 1;
     }
-    return (nb * neg);
+    return (nb);
 }

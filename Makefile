@@ -5,10 +5,10 @@
 ## Compiling mmmmh ? Good idea
 ##
 
-MAIN				=	src/main.c			\
+MAIN				=	src/main.c				\
 
-SRC					=	src/parse_options.c	 \
-						src/set_options.c	 \
+SRC					=	src/parse_options.c		\
+						src/set_options.c		\
 
 OBJ					=	$(MAIN:.c=.o) $(SRC:.c=.o)
 
