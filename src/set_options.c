@@ -71,7 +71,8 @@ bolean_t set_map_size(option_t *options, char option, char *arg)
     return (TRUE);
 }
 
-bolean_t set_game_option(option_t *options, char option, char *arg)
+bolean_t set_game_option(option_t *options, char option,
+                                    __attribute__((unused))char *arg)
 {
     int index = 0;
 
