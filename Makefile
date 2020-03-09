@@ -7,11 +7,11 @@
 
 MAIN				=	src/main.c
 
-SRC					=
+SRC					=	src/tetris.c									\
+						src/tetriminos_handling/read_tetriminos_dir.c	\
+						src/tetriminos_handling/get_tetriminos.c		\
 
-SRC_OTHER			=	src/usage.c
-
-OBJ					=	$(MAIN:.c=.o) $(SRC)
+OBJ					=	$(MAIN:.c=.o) $(SRC:.c=.o)
 
 NAME 				=	tetris
 

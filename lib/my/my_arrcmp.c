@@ -21,7 +21,7 @@ int my_arrcmp(char **first, char **second)
     if (len_first != len_second)
         return (len_first - len_second);
     while (first[index] && second[index]) {
-        if (my_strcmp(first[index], second[index], 0))
+        if (my_strcmp(first[index], second[index]))
             return (1);
         index += 1;
     }

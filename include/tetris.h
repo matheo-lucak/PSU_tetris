@@ -8,6 +8,7 @@
 #ifndef TETRIS_H_
 #define TETRIS_H_
 
+#include <stdbool.h>
 #include <stddef.h>
 
 //Defines the position of a 2d int vector.
@@ -22,8 +23,15 @@ typedef struct dimensions_s {
     size_t height;
 } dimensions_t;
 
+typedef enum shape_valid_e {
+    VOID,
+    CORRECT,
+    INCORRECT
+} shape_valid_t;
+
 //A tetrimino characteristics.
 typedef struct tetrimino_s {
+    char **shape;
     char *name;
     dimensions_t dims;
     size_t color;
@@ -42,6 +50,44 @@ typedef struct option_s {
     char control_keys[3];
     char option_keys[3];
 } option_t;
+
+
+/*
+** ***********************
+** | Tetriminos Handling |
+** ***********************
+*/
+
+//Reads the "./tetriminos/" directory and checks all of the
+//tetriminos properties.
+//
+//Fills the tetrimino_t simple linked list.
+//
+//Returns 1 if there's no issue.
+//Returns 0 otherwise.
+bool read_tetriminos_dir(tetrimino_t **head);
+
+//Checks a tetrimino properties.
+//
+//Fills the tetrimino_t node.
+//
+//Returns 1 if there's no issue.
+//Returns 0 otherwise.
+bool get_tetrimino(tetrimino_t *node, const char file_name[]);
+
+
+/*
+** ******************
+** | Main game Loop |
+** ******************
+*/
+
+//Where the game starts looping.
+//
+//Returns 84 if an error occurs.
+//Returns 0 otherwise.
+
+int tetris(const int ac, const char * const av[]);
 
 
 #endif /* !TETRIS_H_ */
