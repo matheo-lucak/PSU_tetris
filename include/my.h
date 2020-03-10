@@ -70,6 +70,7 @@ char *my_strdup_char(const char *template, const char c);
 char *my_strdup_cmpstr(const char *template, const char cmp[]);
 int my_strcmp(const char *first, const char *second);
 int my_strncmp(const char *first, char const *second, const unsigned int n);
+char *my_strcpy(char *dest, char const *src);
 
 int my_skip_a_file_line(const int fd);
 
