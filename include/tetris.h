@@ -40,6 +40,7 @@ typedef struct __attribute__((packed))tetrimino_s {
     char **shape;
     char *name;
     dimensions_t dims;
+    ssize_t alloc_side;
     size_t color;
     struct tetrimino_s *next;
 } tetrimino_t;

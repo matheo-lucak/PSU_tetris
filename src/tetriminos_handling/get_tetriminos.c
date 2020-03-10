@@ -80,7 +80,7 @@ static ssize_t get_shape_alloc_size(const int fd, const dimensions_t dims)
         return (-1);
     lseek(fd, 0, SEEK_SET);
     my_skip_a_file_line(fd);
-    return (max_len);
+    return ((ssize_t)nb_lines >= max_len) ? (ssize_t)nb_lines : max_len;
 }
 
 static bool fill_shape(const int fd, tetrimino_t *node)
@@ -90,18 +90,19 @@ static bool fill_shape(const int fd, tetrimino_t *node)
 
     if (!node || fd == -1)
         return (false);
-    if (get_shape_alloc_size(fd, node->dims) <= 0)
+    node->alloc_side = get_shape_alloc_size(fd, node->dims);
+    if (node->alloc_side <= 0)
         return (false);
-    node->shape = malloc(sizeof(char *) * (node->dims.height + 1));
+    node->shape = malloc(sizeof(char *) * (node->alloc_side + 1));
     if (!node->shape)
         return (false);
     for (index = 0; index < node->dims.height + 1; node->shape[index++] = NULL);
     for (index = 0; index < node->dims.height; index += 1) {
-        node->shape[index] = malloc(sizeof(char) * (node->dims.height + 1));
+        node->shape[index] = malloc(sizeof(char) * (node->alloc_side + 1));
         if (!node->shape[index])
             return (false);
-        my_memset(node->shape[index], ' ', node->dims.height);
-        node->shape[index][node->dims.height] = '\0';
+        my_memset(node->shape[index], ' ', node->alloc_side);
+        node->shape[index][node->alloc_side] = '\0';
         line = get_next_line(fd);
         if (!line)
             return (false);
@@ -118,7 +119,7 @@ bool get_tetrimino(tetrimino_t *node, const char file_name[])
 
     if (!node || !file_extension_determ(file_name, ".tetrimino"))
         return (false);
-    *node = (tetrimino_t){NULL, NULL, {0, 0}, 0, NULL};
+    *node = (tetrimino_t){NULL, NULL, {0, 0}, 0, 0, NULL};
     node->name = my_strndup(file_name, my_strlen(file_name) - 10);
     if (!node->name)
         return (false);
@@ -132,8 +133,8 @@ bool get_tetrimino(tetrimino_t *node, const char file_name[])
         return (false);
     if (!fill_shape(fd, node))
         return (false);
-    my_printf("shape = %p, name = %s, dims.width = %d, dims.height = %d, color = %lu, next = %p\n",
-                node->shape, node->name, node->dims.height, node->dims.width, node->color, node->next);
+    my_printf("shape = %p, name = %s, dims.width = %d, dims.height = %d, alloc_side = %li, color = %lu, next = %p\n",
+                node->shape, node->name, node->dims.height, node->dims.width, node->alloc_side, node->color, node->next);
     my_show_arr(node->shape);
     return (true);
 }
