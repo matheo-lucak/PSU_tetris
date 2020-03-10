@@ -14,7 +14,8 @@ bolean_t set_control_key(option_t *options, char option, char *arg);
 bolean_t set_option_key(option_t *options, char option, char *arg);
 bolean_t set_level(option_t *options, char option, char *arg);
 bolean_t set_map_size(option_t *options, char option, char *arg);
-bolean_t set_game_option(option_t *options, char option, char *arg);
+bolean_t set_game_option(option_t *options, char option,
+                        __attribute__((unused))char *arg);
 
 static bolean_t (*set_option_func[])(option_t *, char , char *) = {
     set_level,
