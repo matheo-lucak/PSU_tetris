@@ -7,6 +7,7 @@
 
 #include <stdbool.h>
 #include <fcntl.h>
+#include <stdlib.h>
 #include "my.h"
 #include "tetris.h"
 
@@ -75,7 +76,7 @@ static ssize_t get_shape_alloc_size(const int fd, const dimensions_t dims)
             nb_lines += 1;
     } while (tmp_len > -1);
     if (!star_found || tmp_len == -2 || nb_lines == 0
-        || nb_lines != dims.height || max_len != dims.width)
+        || nb_lines != dims.height || (size_t)max_len != dims.width)
         return (-1);
     lseek(fd, 0, SEEK_SET);
     my_skip_a_file_line(fd);
@@ -89,17 +90,23 @@ static bool fill_shape(const int fd, tetrimino_t *node)
 
     if (!node || fd == -1)
         return (false);
-    if (!get_shape_alloc_size(fd, node->dims) <= 0)
+    if (get_shape_alloc_size(fd, node->dims) <= 0)
         return (false);
-    node->shape = malloc(sizeof(char *) * node->dims.height);
+    node->shape = malloc(sizeof(char *) * (node->dims.height + 1));
     if (!node->shape)
         return (false);
-    for (index = 0; index < node->dims.height; node->shape[index] = NULL);
-    index = 0;
-    while (index < node->dims.height) {
-        node->shape[index] = malloc(sizeof(char *) * node->dims.height);
+    for (index = 0; index < node->dims.height + 1; node->shape[index++] = NULL);
+    for (index = 0; index < node->dims.height; index += 1) {
+        node->shape[index] = malloc(sizeof(char) * (node->dims.height + 1));
+        if (!node->shape[index])
+            return (false);
+        my_memset(node->shape[index], ' ', node->dims.height);
+        node->shape[index][node->dims.height] = '\0';
         line = get_next_line(fd);
-        index += 1;
+        if (!line)
+            return (false);
+        my_strcpy(node->shape[index], line);
+        free(line);
     }
     return (true);
 }
@@ -127,5 +134,6 @@ bool get_tetrimino(tetrimino_t *node, const char file_name[])
         return (false);
     my_printf("shape = %p, name = %s, dims.width = %d, dims.height = %d, color = %lu, next = %p\n",
                 node->shape, node->name, node->dims.height, node->dims.width, node->color, node->next);
+    my_show_arr(node->shape);
     return (true);
 }

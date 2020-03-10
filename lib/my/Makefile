@@ -46,7 +46,8 @@ SRC	=			./my_putchar.c						\
 				./find_char.c						\
 				./get_next_line.c					\
 				./my_memset.c						\
-				./my_absolute_getnbr.c
+				./my_absolute_getnbr.c				\
+				./my_skip_a_file_line.c
 
 SRCMYPRINTF	=	./my_printf/my_printf.c				\
 				./my_printf/flag_checkers.c			\

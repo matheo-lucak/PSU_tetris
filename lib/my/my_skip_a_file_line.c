@@ -5,7 +5,7 @@
 ** my_skip_a_file_line.c
 */
 
-#include <stddef.h>
+#include <stdlib.h>
 #include "my.h"
 
 int my_skip_a_file_line(const int fd)

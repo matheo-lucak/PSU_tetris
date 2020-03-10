@@ -12,7 +12,8 @@
 #include "set_option.h"
 
 static bolean_t (*set_option_func[])(option_t *, char , char *);
-static struct option const option_template[11];
+
+static const struct option option_template[11];
 
 bolean_t parse_option(const int ac, char * const av[], option_t *options)
 {
@@ -23,7 +24,7 @@ bolean_t parse_option(const int ac, char * const av[], option_t *options)
         return (84);
     do {
         check = getopt_long(ac, av, "L:l:r:t:d:q:p:s:wD",
-                                        option_template, NULL);
+                            option_template, NULL);
         index = find_char("LlrtdqpswD", check);
         if (index == -1)
             continue;
