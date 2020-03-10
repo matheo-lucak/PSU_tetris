@@ -71,16 +71,17 @@ bolean_t set_map_size(option_t *options, char option, char *arg)
     return (TRUE);
 }
 
-bolean_t set_game_option(option_t *options, char option, char *arg)
+bolean_t set_game_option(option_t *options, char option,
+                                    __attribute__((unused))char *arg)
 {
     int index = 0;
 
     if (!option)
         return (FALSE);
-    index = find_char("DW", option);
+    index = find_char("Dw", option);
     if (index == -1)
         return (FALSE);
-    options->game_option |= my_pow(index + 1, 2);
-    my_printf("Option %c set bit %d\n", option, my_pow(index + 1, 2));
+    options->game_option |= my_pow(2, index);
+    my_printf("Option %c set bit %d\n", option, my_pow(2, index));
     return (TRUE);
 }
