@@ -5,11 +5,12 @@
 ** gets a string length
 */
 
-int my_strlen(char const *str)
-{
-    int i = -1;
+#include <unistd.h>
 
-    if (str)
-        while (str[++i]);
-    return (i);
+ssize_t my_strlen(const char *str)
+{
+    ssize_t index = -1;
+
+    while (str && str[++index]);
+    return (index);
 }

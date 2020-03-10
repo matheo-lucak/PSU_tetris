@@ -57,10 +57,13 @@ bool read_tetriminos_dir(tetrimino_t **head)
         if (!my_strcmp(dir_stat->d_name, ".")
             || !my_strcmp(dir_stat->d_name, ".."))
             continue;
-        if (!(*head) && !add_first_tetrimino(head, dir_stat->d_name))
-            return (false);
-        else if (!add_tetrimino(head, dir_stat->d_name))
-            return (false);
+        if (!(*head)) {
+            if (!add_first_tetrimino(head, dir_stat->d_name))
+                return (false);
+        } else {
+            if (!add_tetrimino(head, dir_stat->d_name))
+                return (false);
+        }
     }
     closedir(dir);
     return ((*head)) ? true : false;

@@ -13,7 +13,7 @@ int my_absolute_getnbr(const char *str)
     int nb = 0;
 
     if (!my_str_is_num(str))
-        return (0);
+        return (-1);
     while (str[index]) {
         if (index > 0)
             nb *= 10;

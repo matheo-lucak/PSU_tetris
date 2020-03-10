@@ -48,7 +48,7 @@ void my_memset(char *to_write_on, const char to_fill_with,
 
 //computes len of types
 int my_int_size(int nb, int i);
-int my_strlen(const char *str);
+ssize_t my_strlen(const char *str);
 int my_arrlen(char **array);
 
 int my_pow(int nb, int p);
