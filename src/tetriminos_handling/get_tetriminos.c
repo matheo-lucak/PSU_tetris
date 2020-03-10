@@ -39,34 +39,43 @@ static bool fill_first_tetrimino_line(const int fd, tetrimino_t *node)
     return (true);
 }
 
-ssize_t get_shape_line(const int fd)
+ssize_t get_shape_line(const int fd, bool *star_found)
 {
-    char *line = NULL;
     ssize_t line_len = 0;
+    size_t index = 0;
+    char *line = NULL;
 
     line = get_next_line(fd);
-    if (line) {
-        line_len = my_strlen(line);
-        free(line);
-        return (line_len);
+    if (!line)
+        return (-1);
+    line_len = my_strlen(line);
+    while (line[index]) {
+        if (line[index] == '*')
+            *star_found = true;
+        else if (line[index] != ' ')
+            return (-2);
+        index += 1;
     }
-    return (-1);
+    free(line);
+    return (line_len);
 }
 
 static ssize_t get_shape_alloc_size(const int fd, const dimensions_t dims)
 {
+    bool star_found = false;
     ssize_t max_len = -1;
     ssize_t tmp_len = -1;
     size_t nb_lines = 0;
 
     do {
-        tmp_len = get_shape_line(fd);
+        tmp_len = get_shape_line(fd, &star_found);
         if (tmp_len > max_len)
             max_len = tmp_len;
         if (tmp_len > 0)
             nb_lines += 1;
     } while (tmp_len > -1);
-    if (nb_lines == 0 || nb_lines != dims.height || max_len != dims.width)
+    if (!star_found || tmp_len == -2 || nb_lines == 0
+        || nb_lines != dims.height || max_len != dims.width)
         return (-1);
     lseek(fd, 0, SEEK_SET);
     my_skip_a_file_line(fd);
@@ -76,6 +85,7 @@ static ssize_t get_shape_alloc_size(const int fd, const dimensions_t dims)
 static bool fill_shape(const int fd, tetrimino_t *node)
 {
     register size_t index = 0;
+    char *line = NULL;
 
     if (!node || fd == -1)
         return (false);
@@ -88,6 +98,7 @@ static bool fill_shape(const int fd, tetrimino_t *node)
     index = 0;
     while (index < node->dims.height) {
         node->shape[index] = malloc(sizeof(char *) * node->dims.height);
+        line = get_next_line(fd);
         index += 1;
     }
     return (true);
