@@ -9,19 +9,8 @@
 #define TETRIS_H_
 
 #include <stdbool.h>
-#include <stddef.h>
-
-typedef enum bolean_e
-{
-    FALSE,
-    TRUE
-} bolean_t;
-
-//Defines the position of a 2d int vector.
-typedef struct vector2i_s {
-    long int x;
-    long int y;
-} vector2i_t;
+#include <unistd.h>
+#include <ncurses.h>
 
 //Defines the boundaries of a component.
 typedef struct dimensions_s {
@@ -42,7 +31,9 @@ typedef struct __attribute__((packed))tetrimino_s {
     dimensions_t dims;
     ssize_t alloc_side;
     size_t color;
+    bool error;
     struct tetrimino_s *next;
+    struct tetrimino_s *prev;
 } tetrimino_t;
 
 //Enum for the chosen gamemode.
@@ -54,12 +45,13 @@ typedef enum option_flag_e {
 typedef struct __attribute__((packed))option_s {
     unsigned int level;
     unsigned int game_option : 2;
-    vector2i_t map_size;
-    char control_keys[4];
-    char option_keys[2];
+    dimensions_t map_size;
+    int control_keys[4];
+    int option_keys[2];
 } option_t;
 
-bolean_t parse_option(const int ac, char * const av[], option_t *options);
+
+bool parse_option(const int ac, char * const av[], option_t *options);
 
 /*
 ** ***********************
@@ -82,7 +74,7 @@ bool read_tetriminos_dir(tetrimino_t **head);
 //
 //Returns 1 if there's no issue.
 //Returns 0 otherwise.
-bool get_tetrimino(tetrimino_t *node, const char file_name[]);
+void get_tetrimino(tetrimino_t *node, const char file_name[]);
 
 //Free's allocated memory of a tetrimino list with memory checkers before
 //freeing.
@@ -93,6 +85,16 @@ void free_tetriminos_list(tetrimino_t *head);
 //Returns 1 if it has.
 //Returns 0 otherwise.
 bool file_extension_determ(const char file_name[], const char extension[]);
+
+/*
+** **************
+** | Debug mode |
+** **************
+*/
+
+size_t get_tetriminos_nb(tetrimino_t **head);
+
+void print_prog_stats(tetrimino_t **tetrimino_list, const option_t options);
 
 
 /*
@@ -105,7 +107,6 @@ bool file_extension_determ(const char file_name[], const char extension[]);
 //
 //Returns 84 if an error occurs.
 //Returns 0 otherwise.
-
 int tetris(const int ac, char * const av[]);
 
 

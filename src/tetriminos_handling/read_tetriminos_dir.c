@@ -14,17 +14,17 @@
 static bool add_tetrimino(tetrimino_t **head, const char file_name[])
 {
     tetrimino_t *node = NULL;
-    tetrimino_t *tmp = NULL;
 
     if (!head || !(*head))
         return (false);
     node = malloc(sizeof(tetrimino_t));
     if (!node)
         return (false);
-    if (!get_tetrimino(node, file_name))
-        return (false);
-    for (tmp = (*head); tmp->next; tmp = tmp->next);
-    tmp = node;
+    get_tetrimino(node, file_name);
+    node->next = *head;
+    node->prev = (*head)->prev;
+    (*head)->prev->next = node;
+    (*head)->prev = node;
     return (true);
 }
 
@@ -37,8 +37,9 @@ static bool add_first_tetrimino(tetrimino_t **head, const char file_name[])
     node = malloc(sizeof(tetrimino_t));
     if (!node)
         return (false);
-    if (!get_tetrimino(node, file_name))
-        return (false);
+    get_tetrimino(node, file_name);
+    node->next = node;
+    node->prev = node;
     *head = node;
     return (true);
 }
@@ -54,8 +55,7 @@ bool read_tetriminos_dir(tetrimino_t **head)
     if (!dir)
         return (false);
     for (dir_stat = readdir(dir); dir_stat; dir_stat = readdir(dir)) {
-        if (!my_strcmp(dir_stat->d_name, ".")
-            || !my_strcmp(dir_stat->d_name, ".."))
+        if (!file_extension_determ(dir_stat->d_name, ".tetrimino"))
             continue;
         if (!(*head)) {
             if (!add_first_tetrimino(head, dir_stat->d_name))

@@ -10,8 +10,10 @@ MAIN				=	src/main.c										\
 SRC					=	src/parse_options.c								\
 						src/set_options.c								\
 						src/tetriminos_handling/read_tetriminos_dir.c	\
-						src/tetriminos_handling/get_tetriminos.c		\
+						src/debug_mode/print_prog_stats.c				\
+						src/debug_mode/get_tetriminos_nb.c				\
 						src/tetriminos_handling/free_tetriminos_list.c	\
+						src/tetriminos_handling/get_tetriminos.c		\
 						src/tetriminos_handling/file_extension_determ.c	\
 
 SRC_TESTS			=	tests/test_file_extension_determ.c				\

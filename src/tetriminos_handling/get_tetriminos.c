@@ -11,12 +11,6 @@
 #include "my.h"
 #include "tetris.h"
 
-// char **shape;
-// char *name;
-// dimensions_t dims;
-// size_t color;
-// struct tetrimino_s *next;
-
 static bool fill_first_tetrimino_line(const int fd, tetrimino_t *node)
 {
     char **first_line = NULL;
@@ -57,8 +51,10 @@ ssize_t get_shape_line(const int fd, bool *star_found)
             return (-2);
         index += 1;
     }
+    while (line_len > 0 && line[line_len] != '*')
+        line_len -= 1;
     free(line);
-    return (line_len);
+    return (line_len + 1);
 }
 
 static ssize_t get_shape_alloc_size(const int fd, const dimensions_t dims)
@@ -112,29 +108,33 @@ static bool fill_shape(const int fd, tetrimino_t *node)
     return (true);
 }
 
-bool get_tetrimino(tetrimino_t *node, const char file_name[])
+void get_tetrimino(tetrimino_t *node, const char file_name[])
 {
     char *absolute_path = NULL;
     int fd = -1;
 
     if (!node || !file_extension_determ(file_name, ".tetrimino"))
-        return (false);
-    *node = (tetrimino_t){NULL, NULL, {0, 0}, 0, 0, NULL};
+        return;
+    *node = (tetrimino_t){NULL, NULL, {0, 0}, 0, 0, false, NULL, NULL};
     node->name = my_strndup(file_name, my_strlen(file_name) - 10);
-    if (!node->name)
-        return (false);
+    if (!node->name) {
+        node->error = true;
+        return;
+    }
     absolute_path = my_strcat("./tetriminos/", file_name);
-    if (!absolute_path)
-        return (false);
+    if (!absolute_path) {
+        node->error = true;
+        return;
+    }
     fd = open(absolute_path, O_RDONLY);
-    if (fd == -1)
-        return (false);
-    if (!fill_first_tetrimino_line(fd, node))
-        return (false);
+    if (fd == -1) {
+        node->error = true;
+        return;
+    }
+    if (!fill_first_tetrimino_line(fd, node)) {
+        node->error = true;
+        return;
+    }
     if (!fill_shape(fd, node))
-        return (false);
-    my_printf("shape = %p, name = %s, dims.width = %d, dims.height = %d, alloc_side = %li, color = %lu, next = %p\n",
-                node->shape, node->name, node->dims.height, node->dims.width, node->alloc_side, node->color, node->next);
-    my_show_arr(node->shape);
-    return (true);
+        node->error = true;
 }
