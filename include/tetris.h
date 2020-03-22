@@ -11,12 +11,6 @@
 #include <stdbool.h>
 #include <stddef.h>
 
-typedef enum bolean_e
-{
-    FALSE,
-    TRUE
-} bolean_t;
-
 //Defines the position of a 2d int vector.
 typedef struct vector2i_s {
     long int x;
@@ -51,6 +45,15 @@ typedef enum option_flag_e {
     NEXT = 2
 } option_flag_t;
 
+//Enum corresponding to the control_keys'index
+typedef enum key_code_e {
+    KEY_CODE_LEFT = 0,
+    KEY_CODE_RIGHT = 1,
+    KEY_CODE_TURN = 2,
+    KEY_CODE_DROP = 3,
+} key_code_t;
+
+
 typedef struct __attribute__((packed))option_s {
     unsigned int level;
     unsigned int game_option : 2;
@@ -59,7 +62,7 @@ typedef struct __attribute__((packed))option_s {
     char option_keys[2];
 } option_t;
 
-bolean_t parse_option(const int ac, char * const av[], option_t *options);
+bool parse_option(const int ac, char * const av[], option_t *options);
 
 /*
 ** ***********************
@@ -100,6 +103,8 @@ bool file_extension_determ(const char file_name[], const char extension[]);
 ** | Main game Loop |
 ** ******************
 */
+
+int game(option_t options, tetrimino_t **tetrimino_list);
 
 //Where the game starts looping.
 //

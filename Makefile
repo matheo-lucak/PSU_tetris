@@ -9,6 +9,7 @@ MAIN				=	src/main.c										\
 
 SRC					=	src/parse_options.c								\
 						src/set_options.c								\
+						src/game_loop/game.c							\
 						src/tetriminos_handling/read_tetriminos_dir.c	\
 						src/tetriminos_handling/get_tetriminos.c		\
 						src/tetriminos_handling/free_tetriminos_list.c	\
@@ -26,7 +27,7 @@ override CPPFLAGS	+=	-I./include/
 
 override LDFLAGS	+=	-L./lib/
 
-override LDLIBS		+= 	-lmy
+override LDLIBS		+= 	-lmy -lncurses
 
 LIB 				=	lib/libmy.a
 

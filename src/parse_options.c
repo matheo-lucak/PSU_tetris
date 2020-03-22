@@ -11,11 +11,11 @@
 #include "tetris.h"
 #include "set_option.h"
 
-static bolean_t (*set_option_func[])(option_t *, char , char *);
+static bool (*set_option_func[])(option_t *, char , char *);
 
 static const struct option option_template[11];
 
-bolean_t parse_option(const int ac, char * const av[], option_t *options)
+bool parse_option(const int ac, char * const av[], option_t *options)
 {
     int check = 0;
     int index = 0;
@@ -30,8 +30,8 @@ bolean_t parse_option(const int ac, char * const av[], option_t *options)
             continue;
         if (!set_option_func[index](options, check, optarg)) {
             my_printf("%s is bad argument for option %c\n", optarg, check);
-            return (FALSE);
+            return (false);
         }
     } while (check != -1);
-    return (TRUE);
+    return (true);
 }

@@ -8,16 +8,17 @@
 #ifndef SET_OPTION_H_
 #define SET_OPTION_H_
 
+#include <stdbool.h>
 #include "tetris.h"
 
-bolean_t set_control_key(option_t *options, char option, char *arg);
-bolean_t set_option_key(option_t *options, char option, char *arg);
-bolean_t set_level(option_t *options, char option, char *arg);
-bolean_t set_map_size(option_t *options, char option, char *arg);
-bolean_t set_game_option(option_t *options, char option,
+bool set_control_key(option_t *options, char option, char *arg);
+bool set_option_key(option_t *options, char option, char *arg);
+bool set_level(option_t *options, char option, char *arg);
+bool set_map_size(option_t *options, char option, char *arg);
+bool set_game_option(option_t *options, char option,
                         __attribute__((unused))char *arg);
 
-static bolean_t (*set_option_func[])(option_t *, char , char *) = {
+static bool (*set_option_func[])(option_t *, char , char *) = {
     set_level,
     set_control_key,
     set_control_key,

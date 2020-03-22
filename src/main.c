@@ -18,13 +18,14 @@ int tetris(const int ac, char * const av[])
         return (84);
     if (!(read_tetriminos_dir(&tetrimino_list)))
         return (84);
+    game(options, &tetrimino_list);
     free_tetriminos_list(tetrimino_list);
     return (0);
 }
 
 int main(const int ac, char * const av[])
 {
-    if (ac < 2)
+    if (ac < 1)
         return (84);
     return (tetris(ac, av));
 }
