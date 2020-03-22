@@ -16,7 +16,7 @@ char **create_board(void)
     char **board = NULL;
     register size_t index = 0;
 
-    board = malloc(sizeof(char *) * (my_arrlen((char **)tetris_board_template)));
+    board = malloc(sizeof(char *) * (my_arrlen((char *)tetris_board_template)));
     if (!board)
         return (NULL);
     while (tetris_board_template[index]) {

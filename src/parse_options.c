@@ -5,10 +5,8 @@
 ** parse_options
 */
 
-#include <unistd.h>
 #include <getopt.h>
 #include "my.h"
-#include "tetris.h"
 #include "set_option.h"
 
 static bool (*set_option_func[])(option_t *, char , char *);

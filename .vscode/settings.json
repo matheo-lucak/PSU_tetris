@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "set_option.h": "c",
+        "tetris.h": "c"
+    }
+}
