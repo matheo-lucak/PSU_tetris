@@ -11,9 +11,13 @@
 
 static void free_tetriminos_node(tetrimino_t *node)
 {
+    register size_t index = 0;
+
     if (node->name)
         free(node->name);
-    my_free_arr((void **)node->shape);
+    for (index = 0; index < 4; index += 1) {
+        my_free_arr((void **)node->shapes[index]);
+    }
     free(node);
 }
 

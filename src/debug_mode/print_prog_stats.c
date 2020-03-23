@@ -10,8 +10,7 @@
 
 static void print_key(const int c)
 {
-    
-    my_printf(c == 32 ? "(space)\n" : "%d\n", c);
+    my_printf(c == ' ' ? "(space)\n" : "%d\n", c);
 }
 
 static void print_selected_keys(const int control_keys[4],
@@ -38,7 +37,7 @@ static void print_shape_char(const char *shape_line, size_t *x)
 
     if (shape_line[tmp] == ' ') {
         star_finder = tmp;
-        while (shape_line[star_finder] && shape_line[star_finder] != '*');
+        while (shape_line[star_finder] && shape_line[star_finder++] != '*');
         if (!shape_line[star_finder]) {
             *x = star_finder;
             return;
@@ -64,6 +63,8 @@ static void print_tetrimino_shape(const char * const *shape)
 
 void print_prog_stats(tetrimino_t **tetrimino_list, const option_t options)
 {
+    int index = 0;
+
     my_putstr("*** DEBUG MODE ***\n");
     print_selected_keys(options.control_keys, options.option_keys);
     my_putstr(options.game_option >> 1 == 1 ? "Next = Yes\n" : "Next = No\n");

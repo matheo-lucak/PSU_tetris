@@ -52,11 +52,8 @@ bool set_level(option_t *options, char option, char *arg)
 bool set_map_size(option_t *options, char option, char *arg)
 {
     char **parsed_input = my_str_to_word_array(arg, ", ", 0);
-<<<<<<< HEAD
-=======
     int tmp_width = 0;
     int tmp_height = 0;
->>>>>>> dcb34827cefdbdbf44d11cd98f6a8365fec6041d
 
     if (!options || !arg || !parsed_input)
         return (false);
@@ -70,14 +67,9 @@ bool set_map_size(option_t *options, char option, char *arg)
         my_free_arr((void **)parsed_input);
         return (false);
     }
-<<<<<<< HEAD
-    my_printf("Option %c set size to %d, %d\n", option,
-                            options->map_size.x, options->map_size.y);
-=======
     options->map_size.width = (size_t)tmp_width;
     options->map_size.height = (size_t)tmp_height;
     my_printf("Option %c set size to %d, %d\n", option, options->map_size.width, options->map_size.height);
->>>>>>> dcb34827cefdbdbf44d11cd98f6a8365fec6041d
     return (true);
 }
 

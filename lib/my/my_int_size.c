@@ -5,11 +5,13 @@
 ** gets the size of an integer
 */
 
-int my_int_size(int nb, int i)
+int my_int_size(int nb)
 {
+    int i = 1;
+
     if (nb < 0)
-        nb *= 1;
-    if (nb == 0 && i == 0)
+        nb *= -1;
+    if (nb == 0)
         return (1);
     while (nb >= 9) {
         nb /= 10;

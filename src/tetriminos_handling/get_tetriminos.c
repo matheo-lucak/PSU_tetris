@@ -89,20 +89,20 @@ static bool fill_shape(const int fd, tetrimino_t *node)
     node->alloc_side = get_shape_alloc_size(fd, node->dims);
     if (node->alloc_side <= 0)
         return (false);
-    node->shape = malloc(sizeof(char *) * (node->alloc_side + 1));
-    if (!node->shape)
+    node->shapes[UPSIDE] = malloc(sizeof(char *) * (node->alloc_side + 1));
+    if (!(node->shapes[UPSIDE]))
         return (false);
-    for (index = 0; index < node->dims.height + 1; node->shape[index++] = NULL);
-    for (index = 0; index < node->dims.height; index += 1) {
-        node->shape[index] = malloc(sizeof(char) * (node->alloc_side + 1));
-        if (!node->shape[index])
+    for (index = 0; index < (size_t)node->alloc_side + 1; node->shapes[UPSIDE][index++] = NULL);
+    for (index = 0; index < (size_t)node->alloc_side; index += 1) {
+        node->shapes[UPSIDE][index] = malloc(sizeof(char) * (node->alloc_side + 1));
+        if (!node->shapes[UPSIDE][index])
             return (false);
-        my_memset(node->shape[index], ' ', node->alloc_side);
-        node->shape[index][node->alloc_side] = '\0';
+        my_memset(node->shapes[UPSIDE][index], ' ', node->alloc_side);
+        node->shapes[UPSIDE][index][node->alloc_side] = '\0';
         line = get_next_line(fd);
         if (!line)
             return (false);
-        my_strcpy(node->shape[index], line);
+        my_strcpy(node->shapes[UPSIDE][index], line);
         free(line);
     }
     return (true);
@@ -115,7 +115,7 @@ void get_tetrimino(tetrimino_t *node, const char file_name[])
 
     if (!node || !file_extension_determ(file_name, ".tetrimino"))
         return;
-    *node = (tetrimino_t){NULL, NULL, {0, 0}, 0, 0, false, NULL, NULL};
+    my_memset((char *)node, '\0', sizeof(tetrimino_t));
     node->name = my_strndup(file_name, my_strlen(file_name) - 10);
     if (!node->name) {
         node->error = true;
@@ -136,5 +136,7 @@ void get_tetrimino(tetrimino_t *node, const char file_name[])
         return;
     }
     if (!fill_shape(fd, node))
+        node->error = true;
+    if (!init_all_oriented_shapes(node))
         node->error = true;
 }

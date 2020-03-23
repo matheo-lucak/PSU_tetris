@@ -14,7 +14,8 @@ void my_show_arr(char **array)
     if (!array)
         return;
     while (array[index]) {
-        my_printf("%s\n", array[index]);
+        my_putstr(array[index]);
+        my_putchar('\n');
         index += 1;
     }
 }
