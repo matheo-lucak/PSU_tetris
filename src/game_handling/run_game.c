@@ -12,6 +12,7 @@ bool run_game(game_data_t *game_data, option_t options,
                                         tetrimino_t **tetrimino_list)
 {
     refresh();
+    erase();
     display_board(game_data, options);
     return (true);
 }
