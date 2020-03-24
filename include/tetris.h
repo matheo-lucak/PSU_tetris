@@ -172,6 +172,8 @@ bool init_game_data(game_data_t *game_data, option_t options);
 ** ******************
 */
 
+void display_board(game_data_t *game_data, option_t options);
+
 int game(option_t options, tetrimino_t **tetrimino_list);
 
 //Where the game starts looping.
