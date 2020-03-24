@@ -18,6 +18,7 @@ SRC					=	src/debug_mode/get_tetriminos_nb.c				\
 						src/score_handling/save_score.c					\
 						src/tetriminos_handling/file_extension_determ.c	\
 						src/tetriminos_handling/free_tetriminos_list.c	\
+						src/tetriminos_handling/get_blank_tetrimino.c	\
 						src/tetriminos_handling/get_tetriminos.c		\
 						src/tetriminos_handling/read_tetriminos_dir.c	\
 						src/tetriminos_handling/rotate_tetrimino.c		\

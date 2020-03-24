@@ -9,7 +9,8 @@
 #include "my.h"
 #include "tetris.h"
 
-static bool init_oriented_shape(tetrimino_t *tetrimino, unsigned short orientation)
+static bool init_oriented_shape(tetrimino_t *tetrimino,
+                                    unsigned short orientation)
 {
     char **new_shape = NULL;
     register size_t alloc_size = 0;
@@ -25,7 +26,8 @@ static bool init_oriented_shape(tetrimino_t *tetrimino, unsigned short orientati
         return (false);
     for (y = 0; y < alloc_size; y += 1) {
         for (x = 0; x < alloc_size; x += 1) {
-            new_shape[y][x] = tetrimino->shapes[orientation - 1][alloc_size - 1 - x][y];
+            new_shape[y][x] =
+                tetrimino->shapes[orientation - 1][alloc_size - 1 - x][y];
         }
     }
     tetrimino->shapes[orientation] = new_shape;

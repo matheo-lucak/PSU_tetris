@@ -69,6 +69,7 @@ void print_prog_stats(tetrimino_t **tetrimino_list, const option_t options)
     print_selected_keys(options.control_keys, options.option_keys);
     my_putstr(options.game_option >> 1 == 1 ? "Next = Yes\n" : "Next = No\n");
     my_printf("Level = %u\n", options.level);
-    my_printf("Size : %lu*%lu\n", options.map_size.width, options.map_size.height);
+    my_printf("Size : %lu*%lu\n", options.map_size.width,
+                                    options.map_size.height);
     my_printf("Tetriminos: %lu\n", get_tetriminos_nb(tetrimino_list));
 }

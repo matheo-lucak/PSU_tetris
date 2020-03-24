@@ -18,7 +18,6 @@ bool set_control_key(option_t *options, char option, char *arg)
     if (index == -1)
         return (false);
     options->control_keys[index] = arg[0];
-    my_printf("Option %c set key %c\n", option, arg[0]);
     return (true);
 }
 
@@ -44,7 +43,6 @@ bool set_level(option_t *options, char option, char *arg)
     options->level = my_getnbr(arg);
     if (options->level <= 0)
         return (false);
-    my_printf("Option %c set level %d\n", option, options->level);
     return (true);
 }
 
@@ -68,7 +66,6 @@ bool set_map_size(option_t *options, char option, char *arg)
     }
     options->map_size.width = (size_t)tmp_width;
     options->map_size.height = (size_t)tmp_height;
-    my_printf("Option %c set size to %d, %d\n", option, options->map_size.width, options->map_size.height);
     return (true);
 }
 
@@ -83,6 +80,5 @@ bool set_game_option(option_t *options, char option,
     if (index == -1)
         return (false);
     options->game_option |= my_pow(2, index);
-    my_printf("Option %c set bit %d\n", option, my_pow(2, index));
     return (true);
 }
