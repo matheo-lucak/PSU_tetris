@@ -44,7 +44,7 @@ typedef struct __attribute__((packed))tetrimino_s {
     char **shapes[4];
     char *name;
     dimensions_t dims;
-    ssize_t alloc_side;
+    ssize_t alloc_size;
     size_t color;
     bool error;
     unsigned int rotation : 2;
@@ -79,8 +79,14 @@ typedef struct frame_s {
     char *str;
 } frame_t;
 
+typedef struct cell_s {
+    char cell;
+    char color;
+} cell_t;
+
+
 typedef struct __attribute__((packed))game_data_s {
-    char **board;
+    cell_t **board;
     frame_t high_score;
     frame_t score;
     frame_t line_destroyed;
@@ -112,6 +118,7 @@ bool read_tetriminos_dir(tetrimino_t **head);
 //Returns 0 otherwise.
 void get_tetrimino(tetrimino_t *node, const char file_name[]);
 
+char **get_blank_tetrimino(size_t alloc_size);
 
 //Fills all the oriented shapes such as:
 //-RIGHTSIDE
@@ -150,9 +157,9 @@ void print_prog_stats(tetrimino_t **tetrimino_list, const option_t options);
 //Reads high_score file and return the found number
 ssize_t get_score(void);
 
-//Returns a allocated char** of the options's map_size dimensions
+//Returns a allocated char ** of the options's map_size dimensions
 //Returns NULL in case of error
-char **create_board(option_t options);
+cell_t **create_board(option_t options);
 
 //Calls all essential initializer for game
 //Returns 1 if there's no issue.

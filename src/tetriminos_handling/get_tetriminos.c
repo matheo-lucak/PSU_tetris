@@ -79,6 +79,25 @@ static ssize_t get_shape_alloc_size(const int fd, const dimensions_t dims)
     return ((ssize_t)nb_lines >= max_len) ? (ssize_t)nb_lines : max_len;
 }
 
+char **get_blank_tetrimino(size_t alloc_size)
+{
+    char **shape = malloc(sizeof(char *) * (alloc_size + 1));
+    register size_t index = 0;
+
+    if (!shape)
+        return (NULL);
+    while (index < alloc_size) {
+        shape[index] = malloc(sizeof(char) * (alloc_size + 1));
+        if (!(shape[index]))
+            return (NULL);
+        my_memset(shape[index], ' ', alloc_size);
+        shape[index][alloc_size] = '\0';
+        index += 1;
+    }
+    shape[index] = NULL;
+    return (shape);
+}
+
 static bool fill_shape(const int fd, tetrimino_t *node)
 {
     register size_t index = 0;
@@ -86,23 +105,17 @@ static bool fill_shape(const int fd, tetrimino_t *node)
 
     if (!node || fd == -1)
         return (false);
-    node->alloc_side = get_shape_alloc_size(fd, node->dims);
-    if (node->alloc_side <= 0)
+    node->alloc_size = get_shape_alloc_size(fd, node->dims);
+    if (node->alloc_size <= 0)
         return (false);
-    node->shapes[UPSIDE] = malloc(sizeof(char *) * (node->alloc_side + 1));
+    node->shapes[UPSIDE] = get_blank_tetrimino(node->alloc_size);
     if (!(node->shapes[UPSIDE]))
         return (false);
-    for (index = 0; index < (size_t)node->alloc_side + 1; node->shapes[UPSIDE][index++] = NULL);
-    for (index = 0; index < (size_t)node->alloc_side; index += 1) {
-        node->shapes[UPSIDE][index] = malloc(sizeof(char) * (node->alloc_side + 1));
-        if (!node->shapes[UPSIDE][index])
-            return (false);
-        my_memset(node->shapes[UPSIDE][index], ' ', node->alloc_side);
-        node->shapes[UPSIDE][index][node->alloc_side] = '\0';
+    for (index = 0; index < (size_t)node->alloc_size; index += 1) {
         line = get_next_line(fd);
         if (!line)
             return (false);
-        my_strcpy(node->shapes[UPSIDE][index], line);
+        my_strcpychar(node->shapes[UPSIDE][index], line, '*');
         free(line);
     }
     return (true);

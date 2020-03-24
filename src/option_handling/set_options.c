@@ -32,7 +32,6 @@ bool set_option_key(option_t *options, char option, char *arg)
     if (index == -1)
         return (false);
     options->control_keys[index] = arg[0];
-    my_printf("Option %c set key %c\n", option, arg[0]);
     return (true);
 }
 

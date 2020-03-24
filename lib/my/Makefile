@@ -42,11 +42,13 @@ SRC	=			./my_putchar.c						\
 				./my_strdup_cmpstr.c				\
 				./my_strcat.c						\
 				./my_strcpy.c						\
+				./my_strcpychar.c					\
 				./my_str_to_word_array.c			\
 				./find_char_in_str.c				\
 				./find_char.c						\
 				./get_next_line.c					\
 				./my_memset.c						\
+				./my_memcpy.c						\
 				./my_absolute_getnbr.c				\
 				./my_skip_a_file_line.c
 

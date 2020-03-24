@@ -45,6 +45,7 @@ void my_put_nbr_llu(unsigned long long int nb, const char *base);
 
 void my_memset(char *to_write_on, const char to_fill_with,
                 const size_t nb_bytes);
+void *my_memcpy(void *dest, const void *src, size_t n);
 
 //computes len of types
 int my_int_size(int nb, int i);
@@ -71,6 +72,7 @@ char *my_strdup_cmpstr(const char *template, const char cmp[]);
 int my_strcmp(const char *first, const char *second);
 int my_strncmp(const char *first, char const *second, const unsigned int n);
 char *my_strcpy(char *dest, char const *src);
+char *my_strcpychar(char *dest, char const *src, char const to_copy);
 char *my_int_to_str(int nb);
 
 int my_skip_a_file_line(const int fd);
