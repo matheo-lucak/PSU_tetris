@@ -14,7 +14,7 @@ bool init_left_pannel(frame_t *frame, option_t options)
     if (!frame)
         return (false);
     my_memcpy(frame, &left_panel_template, sizeof(frame_t));
-    frame->board = create_board(frame->size);
+    frame->board = create_board(frame->size, frame->style);
     frame->components = malloc(sizeof(frame_component_t) *
                                             (frame->component_nb));
     if (!(frame->board) || !(frame->components))

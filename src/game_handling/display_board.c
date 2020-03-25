@@ -10,10 +10,11 @@
 
 static inline void display_cell(cell_t cell, int x, int y)
 {
-    init_pair(1, cell.color, COLOR_BLACK);
-    attron(COLOR_PAIR(1));
-    mvaddch(y, x, cell.cell);
-    attroff(COLOR_PAIR(1));
+    init_pair(cell.color, cell.color, COLOR_BLACK);
+    attron(COLOR_PAIR(cell.color));
+    mvprintw(y, x, &(cell.cell));
+    attroff(COLOR_PAIR(cell.color));
+    free_pair(cell.color);
 }
 
 void display_board(cell_t **board, dimensions_t size, pos_t pos)

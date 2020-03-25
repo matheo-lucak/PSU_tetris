@@ -81,9 +81,14 @@ typedef struct __attribute__((packed))option_s {
 } option_t;
 
 typedef struct cell_s {
-    char cell;
+    int cell;
     char color;
 } cell_t;
+
+typedef enum cell_style_s {
+    STYLE_0,
+    STYLE_1
+} cell_style_t;
 
 typedef struct frame_component_s {
     int data;
@@ -96,6 +101,7 @@ typedef struct frame_component_s {
 
 typedef struct frame_s {
     cell_t **board;
+    cell_style_t style;
     dimensions_t size;
     pos_t anchor;
     pos_t offset;
@@ -173,8 +179,9 @@ void print_prog_stats(tetrimino_t **tetrimino_list, const option_t options);
 ssize_t get_score(void);
 
 //Returns a allocated char ** of the options's map_size dimensions
+//The allocated map has a specific style, please refer to tetris_cell_template
 //Returns NULL in case of error
-cell_t **create_board(dimensions_t size);
+cell_t **create_board(dimensions_t size, cell_style_t style);
 
 //Calls all essential initializer for game
 //Returns 1 if there's no issue.

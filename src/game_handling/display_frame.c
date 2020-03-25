@@ -23,18 +23,22 @@ static inline pos_t compute_frame_pos(frame_t frame, pos_t middle_pos)
 
 static void display_frame_component(frame_component_t component, pos_t pos)
 {
-    init_pair(1, component.name_color, COLOR_BLACK);
-    attron(COLOR_PAIR(1));
+    init_pair(component.name_color, component.name_color,
+                                            COLOR_BLACK);
+    attron(COLOR_PAIR(component.name_color));
     mvprintw(pos.y + component.pos.y,
             pos.x + component.pos.x,
             component.name);
-    attroff(COLOR_PAIR(1));
-    init_pair(1, component.display_str_color, COLOR_BLACK);
-    attron(COLOR_PAIR(1));
+    attroff(COLOR_PAIR(component.name_color));
+    free_pair(component.name_color);
+    init_pair(component.display_str_color, component.display_str_color,
+                                                            COLOR_BLACK);
+    attron(COLOR_PAIR(component.display_str_color));
     mvprintw(pos.y + component.pos.y,
             pos.x + component.pos.x + my_strlen(component.name),
             component.display_str);
-    attroff(COLOR_PAIR(1));
+    attroff(COLOR_PAIR(component.display_str_color));
+    free_pair(component.display_str_color);
 }
 
 void display_frame(frame_t frame, pos_t middle_pos)
