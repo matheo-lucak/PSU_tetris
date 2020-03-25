@@ -26,9 +26,9 @@ bool init_left_pannel(frame_t *frame, option_t options)
         !init_frame_component(&(frame->components[LEVEL]),
                                 level_template, options.level) ||
         !init_frame_component(&(frame->components[LINES_DESTROYED]),
-                                score_template, 0) ||
+                                lines_template, 0) ||
         !init_frame_component(&(frame->components[TIMER]),
-                                score_template, 0))
+                                timer_template, 0))
         return (false);
     return (true);
 }

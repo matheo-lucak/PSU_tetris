@@ -10,7 +10,7 @@
 const frame_t left_panel_template = {
     .board = NULL,
     .style = 1,
-    .size = (dimensions_t) {30, 10},
+    .size = (dimensions_t) {30, 9},
     .anchor = (pos_t) {-1, 0},
     .offset = (pos_t) {5, 0},
     .component_nb = 5,
