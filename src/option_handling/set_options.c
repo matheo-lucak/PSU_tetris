@@ -36,7 +36,7 @@ bool set_option_key(option_t *options, char option, char *arg)
 
 bool set_level(option_t *options, char option, char *arg)
 {
-    if (!options || !arg)
+    if (!options || !arg || !option)
         return (false);
     if (!my_str_is_num(arg))
         return (false);
@@ -52,7 +52,7 @@ bool set_map_size(option_t *options, char option, char *arg)
     int tmp_width = 0;
     int tmp_height = 0;
 
-    if (!options || !arg || !parsed_input)
+    if (!options || !arg || !parsed_input || !option)
         return (false);
     if (my_arrlen(parsed_input) != 2) {
         my_free_arr((void **)parsed_input);

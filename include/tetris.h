@@ -25,6 +25,12 @@ typedef struct dimensions_s {
     size_t height;
 } dimensions_t;
 
+//Defines the positions of a component.
+typedef struct pos_s {
+    ssize_t x;
+    ssize_t y;
+} pos_t;
+
 typedef enum shape_valid_e {
     VOID,
     CORRECT,
@@ -74,23 +80,32 @@ typedef struct __attribute__((packed))option_s {
     int option_keys[2];
 } option_t;
 
-typedef struct frame_s {
-    int data;
-    char *str;
-} frame_t;
-
 typedef struct cell_s {
     char cell;
     char color;
 } cell_t;
 
+typedef struct frame_component_s {
+    int data;
+    char *display_str;
+    char display_str_color;
+    char *name;
+    char name_color;
+    pos_t pos;
+} frame_component_t;
 
-typedef struct __attribute__((packed))game_data_s {
+typedef struct frame_s {
     cell_t **board;
-    frame_t high_score;
-    frame_t score;
-    frame_t line_destroyed;
-    frame_t level;
+    dimensions_t size;
+    pos_t anchor;
+    pos_t offset;
+    size_t component_nb;
+    frame_component_t *components;
+} frame_t;
+
+typedef struct game_data_s {
+    cell_t **board;
+    frame_t left_panel;
 } game_data_t;
 
 bool parse_option(const int ac, char * const av[], option_t *options);
@@ -159,12 +174,17 @@ ssize_t get_score(void);
 
 //Returns a allocated char ** of the options's map_size dimensions
 //Returns NULL in case of error
-cell_t **create_board(option_t options);
+cell_t **create_board(dimensions_t size);
 
 //Calls all essential initializer for game
 //Returns 1 if there's no issue.
 //Returns 0 otherwise.
 bool init_game_data(game_data_t *game_data, option_t options);
+
+bool init_frame_component(frame_component_t *component,
+                            frame_component_t template, int data);
+
+bool init_left_pannel(frame_t *frame, option_t options);
 
 /*
 ** ******************
@@ -172,7 +192,9 @@ bool init_game_data(game_data_t *game_data, option_t options);
 ** ******************
 */
 
-void display_board(game_data_t *game_data, option_t options);
+void display_board(cell_t **board, dimensions_t size, pos_t pos);
+
+void display_frame(frame_t frame, pos_t middle_pos);
 
 int game(option_t options, tetrimino_t **tetrimino_list);
 

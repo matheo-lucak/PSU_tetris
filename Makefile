@@ -10,12 +10,16 @@ MAIN				=	src/main.c										\
 SRC					=	src/debug_mode/get_tetriminos_nb.c				\
 						src/debug_mode/print_prog_stats.c				\
 						src/game_handling/display_board.c				\
+						src/game_handling/display_frame.c				\
 						src/game_handling/run_game.c					\
+						src/initialize/init_frame.c						\
 						src/initialize/init_game_board.c				\
 						src/initialize/init_game_data.c					\
+						src/initialize/init_left_panel.c				\
 						src/option_handling/parse_options.c				\
 						src/option_handling/set_options.c				\
 						src/score_handling/save_score.c					\
+						src/template/tetris_frame_template.c			\
 						src/tetriminos_handling/file_extension_determ.c	\
 						src/tetriminos_handling/free_tetriminos_list.c	\
 						src/tetriminos_handling/get_blank_tetrimino.c	\

@@ -8,22 +8,23 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include "my.h"
-#include "tetris.h"
+#include "tetris_frame_template.h"
 
-static void save_score(game_data_t game_data)
+static void save_score(int data)
 {
     FILE *fptr = fopen("high_score", "w");
     char *tmp = NULL;
 
     if (!fptr)
         return ;
-    tmp = my_int_to_str(game_data.score.data);
+    tmp = my_int_to_str(data);
     if (!tmp) {
         fclose(fptr);
         return ;
     }
     fwrite(tmp, sizeof(char), my_strlen(tmp), fptr);
     fclose(fptr);
+    free(tmp);
 }
 
 ssize_t get_score(void)
@@ -45,6 +46,8 @@ ssize_t get_score(void)
 
 void should_save_score(game_data_t game_data)
 {
-    if (get_score() < game_data.score.data)
-        save_score(game_data);
+    int data = game_data.left_panel.components[1].data;
+
+    if (get_score() < data)
+        save_score(data);
 }
