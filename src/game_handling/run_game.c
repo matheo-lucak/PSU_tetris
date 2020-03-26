@@ -5,6 +5,7 @@
 ** run_game
 */
 
+#include "time.h"
 #include "my.h"
 #include "tetris.h"
 
