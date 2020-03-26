@@ -8,7 +8,7 @@
 #include "my.h"
 #include "tetris.h"
 
-static inline pos_t compute_frame_pos(frame_t frame, pos_t middle_pos)
+static pos_t compute_frame_pos(frame_t frame, pos_t middle_pos)
 {
     pos_t pos = middle_pos;
 

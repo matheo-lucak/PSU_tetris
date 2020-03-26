@@ -8,7 +8,7 @@
 #include "my.h"
 #include "tetris.h"
 
-static inline void display_cell(cell_t cell, int x, int y)
+static void display_cell(cell_t cell, int x, int y)
 {
     init_pair(cell.color, cell.color, COLOR_BLACK);
     attron(COLOR_PAIR(cell.color));
