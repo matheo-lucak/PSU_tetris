@@ -203,6 +203,9 @@ bool init_right_pannel(frame_t *frame,
 ** ******************
 */
 
+void enqueue_tetrimino(tetrimino_t **queue, tetrimino_t *tetrimino);
+void dequeue_tetrimino(tetrimino_t **queue);
+
 void display_board(cell_t **board, dimensions_t size, pos_t pos);
 
 void display_frame(frame_t frame, pos_t middle_pos, dimensions_t midde_size);

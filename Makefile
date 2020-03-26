@@ -19,6 +19,8 @@ SRC					=	src/debug_mode/get_tetriminos_nb.c				\
 						src/initialize/init_right_panel.c				\
 						src/option_handling/parse_options.c				\
 						src/option_handling/set_options.c				\
+						src/queue_handling/dequeue.c					\
+						src/queue_handling/enqueue.c					\
 						src/score_handling/save_score.c					\
 						src/template/tetris_frame_template.c			\
 						src/tetriminos_handling/file_extension_determ.c	\
