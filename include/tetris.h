@@ -81,7 +81,7 @@ typedef struct __attribute__((packed))option_s {
 } option_t;
 
 typedef struct cell_s {
-    int cell;
+    char cell;
     char color;
 } cell_t;
 

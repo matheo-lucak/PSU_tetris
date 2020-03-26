@@ -12,7 +12,7 @@ static inline void display_cell(cell_t cell, int x, int y)
 {
     init_pair(cell.color, cell.color, COLOR_BLACK);
     attron(COLOR_PAIR(cell.color));
-    mvprintw(y, x, &(cell.cell));
+    mvaddch(y, x, cell.cell);
     attroff(COLOR_PAIR(cell.color));
     free_pair(cell.color);
 }
