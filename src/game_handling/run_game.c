@@ -25,7 +25,8 @@ bool run_game(game_data_t *game_data, option_t options,
     refresh();
     erase();
     display_board(game_data->board, options.map_size, board_pos);
-    display_frame(game_data->left_panel, board_pos);
+    display_frame(game_data->left_panel, board_pos, options.map_size);
+    display_frame(game_data->right_panel, board_pos, options.map_size);
     return (true);
 }
 

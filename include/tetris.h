@@ -112,6 +112,8 @@ typedef struct frame_s {
 typedef struct game_data_s {
     cell_t **board;
     frame_t left_panel;
+    frame_t right_panel;
+    pos_t cursor;
 } game_data_t;
 
 bool parse_option(const int ac, char * const av[], option_t *options);
@@ -192,6 +194,8 @@ bool init_frame_component(frame_component_t *component,
                             frame_component_t template, int data);
 
 bool init_left_pannel(frame_t *frame, option_t options);
+bool init_right_pannel(frame_t *frame,
+                        __attribute__((unused))option_t options);
 
 /*
 ** ******************
@@ -201,7 +205,7 @@ bool init_left_pannel(frame_t *frame, option_t options);
 
 void display_board(cell_t **board, dimensions_t size, pos_t pos);
 
-void display_frame(frame_t frame, pos_t middle_pos);
+void display_frame(frame_t frame, pos_t middle_pos, dimensions_t midde_size);
 
 int game(option_t options, tetrimino_t **tetrimino_list);
 

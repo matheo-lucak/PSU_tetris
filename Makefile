@@ -16,6 +16,7 @@ SRC					=	src/debug_mode/get_tetriminos_nb.c				\
 						src/initialize/init_game_board.c				\
 						src/initialize/init_game_data.c					\
 						src/initialize/init_left_panel.c				\
+						src/initialize/init_right_panel.c				\
 						src/option_handling/parse_options.c				\
 						src/option_handling/set_options.c				\
 						src/score_handling/save_score.c					\
