@@ -8,7 +8,7 @@
 #include "my.h"
 #include "tetris.h"
 
-static inline pos_t compute_board_position(option_t options)
+static pos_t compute_board_position(option_t options)
 {
     pos_t win_dim = {getmaxx(stdscr), getmaxy(stdscr)};
 
