@@ -5,7 +5,6 @@
 ** run_game
 */
 
-#include "time.h"
 #include "my.h"
 #include "tetris.h"
 
@@ -17,17 +16,35 @@ static pos_t compute_board_position(option_t options)
                     (win_dim.y / 2) - (options.map_size.height / 2)});
 }
 
+bool update_game(game_data_t *game_data)
+{
+    clock_t end = clock();
+
+    if (end - game_data->timer > 1000000) {
+        game_data->timer = end;
+        return (true);
+    }
+    return (false);
+}
+
 bool run_game(game_data_t *game_data, option_t options,
-                                        tetrimino_t **tetrimino_list)
+                                        tetrimino_t *tetrimino_list)
 {
     pos_t board_pos = compute_board_position(options);
     static tetrimino_t *queue = NULL;
 
     refresh();
     erase();
-    display_board(game_data->board, options.map_size, board_pos);
-    display_frame(game_data->left_panel, board_pos, options.map_size);
-    display_frame(game_data->right_panel, board_pos, options.map_size);
+    update_queue(&queue, tetrimino_list);
+    display_all(game_data, queue, options, board_pos);
+    parse_input(game_data, queue, options);
+    if (!update_game(game_data))
+        return (true);
+    land_tetrimino(game_data, &queue, options);
+    if (game_data->quit) {
+        empty_queue(&queue);
+        return (false);
+    }
     return (true);
 }
 
@@ -38,9 +55,12 @@ int game(option_t options, tetrimino_t **tetrimino_list)
     if (!init_game_data(&game_data, options))
         return (84);
     initscr();
+    cbreak();
+    timeout(0);
     start_color();
-    while (run_game(&game_data, options, tetrimino_list));
+    while (run_game(&game_data, options, *tetrimino_list));
     endwin();
     should_save_score(game_data);
+    free_game_data(game_data);
     return (0);
 }

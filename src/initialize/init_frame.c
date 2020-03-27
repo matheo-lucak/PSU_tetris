@@ -14,6 +14,7 @@ bool init_frame_component(frame_component_t *component,
 {
     if (!(component))
         return (false);
+    my_memset((char *)component, '\0', sizeof(sizeof(frame_component_t)));
     component->data = data;
     component->pos = template.pos;
     component->name = my_strdup(template.name);

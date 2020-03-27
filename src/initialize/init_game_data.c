@@ -21,6 +21,7 @@ bool init_game_data(game_data_t *game_data, option_t options)
         return (false);
     if (!init_right_pannel(&(game_data->right_panel), options))
         return (false);
-    game_data->cursor.x = options.map_size.width;
+    game_data->cursor.x = options.map_size.width / 2;
+    game_data->timer = clock();
     return (true);
 }

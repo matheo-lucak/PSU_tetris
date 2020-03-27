@@ -62,3 +62,15 @@ void display_frame(frame_t frame, pos_t middle_pos, dimensions_t midde_size)
         display_frame_component(frame.components[index], pos);
     }
 }
+
+void display_next_tetrimino(tetrimino_t *queue, frame_t frame,
+                            pos_t middle_pos, dimensions_t midde_size)
+{
+    pos_t pos = compute_frame_pos(frame, middle_pos, midde_size);
+    tetrimino_t *next = NULL;
+
+    if (!queue || !(queue->next))
+        return ;
+    next = queue->next;
+    display_tetrimino(next, (pos_t) {1, 1}, pos);
+}

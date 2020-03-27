@@ -12,7 +12,7 @@ void dequeue_tetrimino(tetrimino_t **queue)
 {
     tetrimino_t *save = NULL;
 
-    if (!queue || *queue)
+    if (!queue || !(*queue))
         return ;
     save = *queue;
     *queue = (*queue)->next;
