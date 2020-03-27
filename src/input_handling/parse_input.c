@@ -19,8 +19,9 @@ static void control_tetrimino(game_data_t *game_data, tetrimino_t *tetrimino,
 static void control_game_event(game_data_t *game_data, option_t options,
                                                             int key_code)
 {
-    if (key_code == KEY_CODE_QUIT)
+    if (key_code == KEY_CODE_QUIT) {
         game_data->quit = true;
+    }
     if (key_code == KEY_CODE_PAUSE) {
         while (getch() != options.option_keys[KEY_CODE_PAUSE]);
     }
@@ -38,7 +39,7 @@ void parse_input(game_data_t *game_data, tetrimino_t *tetrimino,
             control_tetrimino(game_data, tetrimino, options, index);
     }
     for (index = 0; index < 2; index += 1) {
-        if (input == options.control_keys[index])
+        if (input == options.option_keys[index])
             control_game_event(game_data, options, index);
     }
 }
