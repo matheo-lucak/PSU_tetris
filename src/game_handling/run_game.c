@@ -56,6 +56,7 @@ int game(option_t options, tetrimino_t **tetrimino_list)
         return (84);
     initscr();
     cbreak();
+    keypad(stdscr, true);
     timeout(0);
     start_color();
     while (run_game(&game_data, options, *tetrimino_list));
