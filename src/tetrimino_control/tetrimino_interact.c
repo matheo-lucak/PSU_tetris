@@ -22,10 +22,8 @@ void rotate_tetrimino(game_data_t *game_data, option_t options,
     if (!tetrimino)
         return ;
     rotation = tetrimino->rotation;
-    if (rotation == 4)
-        rotation = 0;
     if (!tetrimino_collide(game_data, options,
-                            tetrimino->shapes[rotation],
+                            tetrimino->shapes[(rotation + 1) % 4],
                             pos)) {
         tetrimino->rotation += 1;
     }
