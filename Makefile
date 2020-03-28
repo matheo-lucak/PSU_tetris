@@ -41,6 +41,7 @@ SRC					=	src/debug_mode/get_tetriminos_nb.c				\
 						src/tetriminos_handling/rotate_tetrimino.c		\
 						src/tetriminos_handling/tetriminos_utils.c		\
 						src/get_randnb.c								\
+						src/tetris.c									\
 
 SRC_TESTS			=	tests/test_file_extension_determ.c				\
 
