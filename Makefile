@@ -31,6 +31,7 @@ SRC					=	src/debug_mode/get_tetriminos_nb.c				\
 						src/score_handling/save_score.c					\
 						src/template/tetris_frame_template.c			\
 						src/tetrimino_control/land_tetrimino.c			\
+						src/tetrimino_control/tetrimino_collide.c		\
 						src/tetrimino_control/tetrimino_interact.c		\
 						src/tetriminos_handling/file_extension_determ.c	\
 						src/tetriminos_handling/free_tetriminos_list.c	\

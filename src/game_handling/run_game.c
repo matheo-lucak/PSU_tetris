@@ -37,7 +37,7 @@ bool run_game(game_data_t *game_data, option_t options,
     erase();
     update_queue(&queue, tetrimino_list);
     display_all(game_data, queue, options, board_pos);
-    parse_input(game_data, queue, options);
+    parse_input(game_data, &queue, options);
     if (!update_game(game_data))
         return (true);
     land_tetrimino(game_data, &queue, options);

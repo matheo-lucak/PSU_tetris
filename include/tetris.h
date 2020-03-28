@@ -216,6 +216,12 @@ void enqueue_tetrimino(tetrimino_t **queue, tetrimino_t *tetrimino);
 void dequeue_tetrimino(tetrimino_t **queue);
 bool empty_queue(tetrimino_t **queue);
 
+/*
+** ******************
+** | Display func ! |
+** ******************
+*/
+
 void display_tetrimino(tetrimino_t *tetrimino, pos_t board_pos, pos_t pos);
 
 void display_board(cell_t **board, dimensions_t size, pos_t pos);
@@ -231,18 +237,30 @@ void display_all(game_data_t *game_data, tetrimino_t *queue,
 
 int game(option_t options, tetrimino_t **tetrimino_list);
 
-void parse_input(game_data_t *game_data, tetrimino_t *tetrimino,
+void parse_input(game_data_t *game_data, tetrimino_t **queue,
                                                 option_t options);
 
-void move_tetrimino(game_data_t *game_data, tetrimino_t *tetrimino,
-                                                        int key_code);
-void rotate_tetrimino(game_data_t *game_data, tetrimino_t *tetrimino);
+/*
+** ************************
+** | Control Tetriminos ! |
+** ************************
+*/
+
+void move_tetrimino(game_data_t *game_data, option_t options,
+                                            tetrimino_t *tetrimino,
+                                            int key_code);
+void rotate_tetrimino(game_data_t *game_data, option_t options,
+                                                 tetrimino_t *tetrimino);
+void drop_tetrimino(game_data_t *game_data, tetrimino_t **queue,
+                                                option_t options);
 
 void update_queue(tetrimino_t **queue, tetrimino_t *tetrimino_list);
 
 bool land_tetrimino(game_data_t *game_data, tetrimino_t **queue,
                                                 option_t options);
 
+bool tetrimino_collide(game_data_t *game_data, option_t options,
+                                                char **shape, pos_t pos);
 //Where the game starts looping.
 //
 //Returns 84 if an error occurs.

@@ -7,13 +7,15 @@
 
 #include "tetris.h"
 
-static void control_tetrimino(game_data_t *game_data, tetrimino_t *tetrimino,
+static void control_tetrimino(game_data_t *game_data, tetrimino_t **queue,
                         option_t options, int key_code)
 {
     if (key_code == KEY_CODE_LEFT || KEY_CODE_RIGHT)
-        move_tetrimino(game_data, tetrimino, key_code);
+        move_tetrimino(game_data, options, *queue, key_code);
     if (key_code == KEY_CODE_TURN)
-        rotate_tetrimino(game_data, tetrimino);
+        rotate_tetrimino(game_data, options, *queue);
+    if (key_code == KEY_CODE_DROP)
+        drop_tetrimino(game_data, queue, options);
 }
 
 static void control_game_event(game_data_t *game_data, option_t options,
@@ -27,16 +29,17 @@ static void control_game_event(game_data_t *game_data, option_t options,
     }
 }
 
-void parse_input(game_data_t *game_data, tetrimino_t *tetrimino,
+void parse_input(game_data_t *game_data, tetrimino_t **queue,
                                                 option_t options)
 {
     register size_t index = 0;
     int input = getch();
 
-
+    if (!queue || !game_data)
+        return ;
     for (index = 0; index < 4; index += 1) {
         if (input == options.control_keys[index])
-            control_tetrimino(game_data, tetrimino, options, index);
+            control_tetrimino(game_data, queue, options, index);
     }
     for (index = 0; index < 2; index += 1) {
         if (input == options.option_keys[index])
