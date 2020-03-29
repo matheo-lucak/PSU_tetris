@@ -75,7 +75,7 @@ typedef enum key_code_e {
     KEY_CODE_PAUSE = 1,
 } key_code_t;
 
-typedef struct __attribute__((packed))option_s {
+typedef struct option_s {
     unsigned int level;
     unsigned int game_option : 2;
     dimensions_t map_size;
@@ -261,6 +261,9 @@ bool land_tetrimino(game_data_t *game_data, tetrimino_t **queue,
 
 bool tetrimino_collide(game_data_t *game_data, option_t options,
                                                 char **shape, pos_t pos);
+
+bool should_break_line(game_data_t *game_data, option_t options);
+
 //Where the game starts looping.
 //
 //Returns 84 if an error occurs.

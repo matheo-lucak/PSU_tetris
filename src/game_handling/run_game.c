@@ -41,6 +41,7 @@ bool run_game(game_data_t *game_data, option_t options,
     if (!update_game(game_data))
         return (true);
     land_tetrimino(game_data, &queue, options);
+    should_break_line(game_data, options);
     if (game_data->quit) {
         empty_queue(&queue);
         return (false);

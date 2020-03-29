@@ -27,7 +27,7 @@ static bool tetrimino_outside_board(option_t options, char **shape,
     if (pos.x + offset.x < 1) {
         return (true);
     }
-    if (pos.x + offset.x > (ssize_t)options.map_size.width - 1) {
+    if (pos.x + offset.x > (ssize_t)options.map_size.width) {
         return (true);
     }
     return (false);

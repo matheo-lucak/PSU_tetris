@@ -11,6 +11,7 @@ SRC					=	src/debug_mode/get_tetriminos_nb.c				\
 						src/debug_mode/print_prog_stats.c				\
 						src/freeer/free_frame.c							\
 						src/freeer/free_game_data.c						\
+						src/game_handling/break_line.c					\
 						src/game_handling/display_all.c					\
 						src/game_handling/display_board.c				\
 						src/game_handling/display_frame.c				\
