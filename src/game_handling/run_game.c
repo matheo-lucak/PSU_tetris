@@ -7,6 +7,7 @@
 
 #include "my.h"
 #include "tetris.h"
+#include "tetris_frame_template.h"
 
 static pos_t compute_board_position(option_t options)
 {
@@ -19,8 +20,9 @@ static pos_t compute_board_position(option_t options)
 bool update_game(game_data_t *game_data)
 {
     clock_t end = clock();
+    int level = game_data->left_panel.components[LEVEL].data;
 
-    if (end - game_data->timer > 1000000) {
+    if (end - game_data->timer > 1000000 / (level)) {
         game_data->timer = end;
         return (true);
     }

@@ -7,6 +7,7 @@
 
 #include "my.h"
 #include "tetris.h"
+#include "tetris_frame_template.h"
 
 static bool is_full_line(cell_t *line, dimensions_t size)
 {
@@ -43,6 +44,7 @@ bool should_break_line(game_data_t *game_data, option_t options)
         if (is_full_line(game_data->board[y], options.map_size)) {
             break_line(game_data, options.map_size, y);
             should_break_line(game_data, options);
+            update_score(game_data);
             return (true);
         }
     }

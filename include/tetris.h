@@ -216,6 +216,10 @@ void enqueue_tetrimino(tetrimino_t **queue, tetrimino_t *tetrimino);
 void dequeue_tetrimino(tetrimino_t **queue);
 bool empty_queue(tetrimino_t **queue);
 
+void update_lambda_comp(frame_component_t *component);
+void update_score(game_data_t *game_data);
+
+
 /*
 ** ******************
 ** | Display func ! |

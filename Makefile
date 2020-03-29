@@ -17,7 +17,9 @@ SRC					=	src/debug_mode/get_tetriminos_nb.c				\
 						src/game_handling/display_frame.c				\
 						src/game_handling/display_tetrimino.c			\
 						src/game_handling/run_game.c					\
+						src/game_handling/update_lambda_comp.c			\
 						src/game_handling/update_queue.c				\
+						src/game_handling/update_score.c				\
 						src/initialize/init_frame.c						\
 						src/initialize/init_game_board.c				\
 						src/initialize/init_game_data.c					\
