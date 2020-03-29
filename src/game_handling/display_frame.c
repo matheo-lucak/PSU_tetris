@@ -17,7 +17,6 @@ static void display_frame_component(frame_component_t component, pos_t pos)
             pos.x + component.pos.x,
             component.name);
     attroff(COLOR_PAIR(component.name_color));
-    free_pair(component.name_color);
     if (component.display_str) {
         init_pair(component.display_str_color, component.display_str_color,
                                                                 COLOR_BLACK);
@@ -26,7 +25,6 @@ static void display_frame_component(frame_component_t component, pos_t pos)
                 pos.x + component.pos.x + my_strlen(component.name),
                 component.display_str);
         attroff(COLOR_PAIR(component.display_str_color));
-        free_pair(component.display_str_color);
     }
 }
 

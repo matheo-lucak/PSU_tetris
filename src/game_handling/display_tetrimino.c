@@ -34,5 +34,4 @@ void display_tetrimino(tetrimino_t *tetrimino, pos_t board_pos, pos_t pos)
         }
     }
     attroff(COLOR_PAIR(tetrimino->color));
-    free_pair(tetrimino->color);
 }

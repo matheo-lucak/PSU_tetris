@@ -14,7 +14,6 @@ static void display_cell(cell_t cell, int x, int y)
     attron(COLOR_PAIR(cell.color));
     mvaddch(y, x, cell.cell);
     attroff(COLOR_PAIR(cell.color));
-    free_pair(cell.color);
 }
 
 void display_board(cell_t **board, dimensions_t size, pos_t pos)
