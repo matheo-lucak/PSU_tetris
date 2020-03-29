@@ -38,12 +38,16 @@ bool tetrimino_collide(game_data_t *game_data, option_t options,
 {
     register size_t x = 0;
     register size_t y = 0;
-    bool collide = false;
+    register bool collide = false;
 
+    if (pos.y < 0)
+        return (false);
     for (y = 0; shape[y] && !collide; y += 1) {
         for (x = 0; shape[y][x] && !collide; x += 1) {
-            collide = tetrimino_outside_board(options, shape, pos, (pos_t){x, y});
-            collide |= tetrimino_collide_cell(game_data, shape, pos, (pos_t){x, y});
+            collide = tetrimino_outside_board(options, shape, pos,
+                                                    (pos_t){x, y});
+            collide |= tetrimino_collide_cell(game_data, shape, pos,
+                                                    (pos_t){x, y});
         }
     }
     return (collide);

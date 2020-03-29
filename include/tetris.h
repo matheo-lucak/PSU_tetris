@@ -254,7 +254,7 @@ void move_tetrimino(game_data_t *game_data, option_t options,
                                             tetrimino_t *tetrimino,
                                             int key_code);
 void rotate_tetrimino(game_data_t *game_data, option_t options,
-                                                 tetrimino_t *tetrimino);
+                                        tetrimino_t *tetrimino);
 void drop_tetrimino(game_data_t *game_data, tetrimino_t **queue,
                                                 option_t options);
 
