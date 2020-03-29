@@ -31,7 +31,7 @@ static void break_line(game_data_t *game_data, dimensions_t size, size_t y)
         }
     }
     for (x = 1; x < size.width + 1; x += 1) {
-        my_memcpy(game_data->board[0] + x, &empty_cell, sizeof(cell_t));
+        my_memcpy(game_data->board[1] + x, &empty_cell, sizeof(cell_t));
     }
 }
 
