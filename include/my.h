@@ -9,6 +9,7 @@
 
 #define MY_H_
 
+#include <stdbool.h>
 #include <unistd.h>
 
 //Returns 1 if the char is found else returns 0
@@ -69,6 +70,7 @@ char *my_strdup(const char *template);
 char *my_strndup(const char *template, int n);
 char *my_strdup_char(const char *template, const char c);
 char *my_strdup_cmpstr(const char *template, const char cmp[]);
+bool my_mass_strcmp(const char *template, ...);
 int my_strcmp(const char *first, const char *second);
 int my_strncmp(const char *first, char const *second, const unsigned int n);
 char *my_strcpy(char *dest, char const *src);

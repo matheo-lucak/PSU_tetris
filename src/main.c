@@ -37,8 +37,7 @@ static bool should_print_usage(const int ac, char * const av[])
     register int index = 0;
 
     for (index = 0; index < ac; index += 1) {
-        if (!my_strcmp("-h", av[index]) ||
-            !my_strcmp("--help", av[index]))
+        if (my_mass_strcmp(av[index], "-h", "--help"))
             return (true);
     }
     return (false);
