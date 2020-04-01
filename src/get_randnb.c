@@ -5,16 +5,17 @@
 ** Gets a random integer in a given range.
 */
 
+#include <stdbool.h>
 #include "stdlib.h"
 
 int get_randomnb(int min, int max)
 {
-    static int i = 0;
+    static bool i = false;
     int nb = 0;
 
     if (!i) {
         srand((size_t)&i);
-        i += 1;
+        i = true;
     }
     if (max == min)
         return (rand() % max);

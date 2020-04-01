@@ -34,6 +34,7 @@ SRC	=			./my_putchar.c						\
 				./my_put_nbr_lu.c					\
 				./my_put_nbr_llu.c					\
 				./my_arrcmp.c						\
+				./my_mass_strcmp.c					\
 				./my_strcmp.c						\
 				./my_strncmp.c						\
 				./my_strdup.c						\
