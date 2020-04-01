@@ -7,7 +7,7 @@
 
 #include <getopt.h>
 #include "my.h"
-#include "set_option.h"
+#include "tetris_options.h"
 
 static bool (*set_option_func[])(option_t *, char , char *);
 

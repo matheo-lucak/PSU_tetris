@@ -11,6 +11,7 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <unistd.h>
+#include <time.h>
 #include <ncurses.h>
 
 //Defines the position of a 2d int vector.
@@ -30,6 +31,8 @@ typedef struct pos_s {
     ssize_t x;
     ssize_t y;
 } pos_t;
+
+#define VEC(x, y) (pos_t) {x, y}
 
 typedef enum shape_valid_e {
     VOID,
@@ -61,7 +64,7 @@ typedef struct __attribute__((packed))tetrimino_s {
 //Enum for the chosen gamemode.
 typedef enum option_flag_e {
     DEBUG = 1,
-    NEXT = 2
+    NO_NEXT = 2
 } option_flag_t;
 
 //Enum corresponding to the control_keys'index
@@ -70,6 +73,8 @@ typedef enum key_code_e {
     KEY_CODE_RIGHT = 1,
     KEY_CODE_TURN = 2,
     KEY_CODE_DROP = 3,
+    KEY_CODE_QUIT = 0,
+    KEY_CODE_PAUSE = 1,
 } key_code_t;
 
 typedef struct option_s {
@@ -112,6 +117,10 @@ typedef struct frame_s {
 typedef struct game_data_s {
     cell_t **board;
     frame_t left_panel;
+    frame_t right_panel;
+    pos_t cursor;
+    clock_t timer;
+    bool quit;
 } game_data_t;
 
 bool parse_option(const int ac, char * const av[], option_t *options);
@@ -166,6 +175,9 @@ bool file_extension_determ(const char file_name[], const char extension[]);
 */
 
 size_t get_tetriminos_nb(tetrimino_t **head);
+size_t number_tetrimino(tetrimino_t *tetrimino_list);
+tetrimino_t *get_n_tetrimino(tetrimino_t *tetrimino_list, size_t n);
+
 
 void print_prog_stats(tetrimino_t **tetrimino_list, const option_t options);
 
@@ -192,6 +204,9 @@ bool init_frame_component(frame_component_t *component,
                             frame_component_t template, int data);
 
 bool init_left_pannel(frame_t *frame, option_t options);
+bool init_right_pannel(frame_t *frame,
+                        __attribute__((unused))option_t options);
+
 
 /*
 ** ******************
@@ -199,11 +214,61 @@ bool init_left_pannel(frame_t *frame, option_t options);
 ** ******************
 */
 
+void enqueue_tetrimino(tetrimino_t **queue, tetrimino_t *tetrimino);
+void dequeue_tetrimino(tetrimino_t **queue);
+bool empty_queue(tetrimino_t **queue);
+
+void update_lambda_comp(frame_component_t *component);
+void update_score(game_data_t *game_data);
+
+
+/*
+** ******************
+** | Display func ! |
+** ******************
+*/
+
+void display_tetrimino(tetrimino_t *tetrimino, pos_t board_pos, pos_t pos);
+
 void display_board(cell_t **board, dimensions_t size, pos_t pos);
 
-void display_frame(frame_t frame, pos_t middle_pos);
+void display_frame(frame_t frame, pos_t middle_pos, dimensions_t midde_size);
+
+void display_next_tetrimino(tetrimino_t *queue, frame_t frame,
+                            pos_t middle_pos, dimensions_t midde_size);
+
+void display_all(game_data_t *game_data, tetrimino_t *queue,
+                                            option_t options,
+                                            pos_t board_pos);
 
 int game(option_t options, tetrimino_t **tetrimino_list);
+
+void parse_input(game_data_t *game_data, tetrimino_t **queue,
+                                                option_t options);
+
+/*
+** ************************
+** | Control Tetriminos ! |
+** ************************
+*/
+
+void move_tetrimino(game_data_t *game_data, option_t options,
+                                            tetrimino_t *tetrimino,
+                                            int key_code);
+void rotate_tetrimino(game_data_t *game_data, option_t options,
+                                        tetrimino_t *tetrimino);
+void drop_tetrimino(game_data_t *game_data, tetrimino_t **queue,
+                                                option_t options);
+
+void update_queue(tetrimino_t **queue, tetrimino_t *tetrimino_list);
+
+bool land_tetrimino(game_data_t *game_data, tetrimino_t **queue,
+                                                option_t options);
+
+bool tetrimino_collide(game_data_t *game_data, option_t options,
+                                                char **shape, pos_t pos);
+
+bool should_break_line(game_data_t *game_data, option_t options);
 
 //Where the game starts looping.
 //
@@ -219,5 +284,21 @@ int tetris(const int ac, char * const av[]);
 
 void should_save_score(game_data_t game_data);
 
+/*
+** ************
+** | Free'ers |
+** ************
+*/
+
+bool free_frame(frame_t frame);
+bool free_game_data(game_data_t game_data);
+
+/*
+** ************
+** | Maths :) |
+** ************
+*/
+
+int get_randomnb(int min, int max);
 
 #endif /* !TETRIS_H_ */

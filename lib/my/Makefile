@@ -34,6 +34,7 @@ SRC	=			./my_putchar.c						\
 				./my_put_nbr_lu.c					\
 				./my_put_nbr_llu.c					\
 				./my_arrcmp.c						\
+				./my_mass_strcmp.c					\
 				./my_strcmp.c						\
 				./my_strncmp.c						\
 				./my_strdup.c						\
@@ -50,7 +51,8 @@ SRC	=			./my_putchar.c						\
 				./my_memset.c						\
 				./my_memcpy.c						\
 				./my_absolute_getnbr.c				\
-				./my_skip_a_file_line.c
+				./my_skip_a_file_line.c				\
+				./my_get_randnb.c
 
 SRCMYPRINTF	=	./my_printf/my_printf.c				\
 				./my_printf/flag_checkers.c			\

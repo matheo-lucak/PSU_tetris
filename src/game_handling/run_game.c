@@ -5,27 +5,49 @@
 ** run_game
 */
 
-#include "time.h"
 #include "my.h"
 #include "tetris.h"
+#include "tetris_frame_template.h"
 
 static pos_t compute_board_position(option_t options)
 {
     pos_t win_dim = {getmaxx(stdscr), getmaxy(stdscr)};
 
     return ((pos_t){(win_dim.x / 2) - (options.map_size.width / 2),
-                        (win_dim.y / 2) - (options.map_size.height / 2)});
+                    (win_dim.y / 2) - (options.map_size.height / 2)});
+}
+
+bool update_game(game_data_t *game_data)
+{
+    clock_t end = clock();
+    int level = game_data->left_panel.components[LEVEL].data;
+
+    if (end - game_data->timer > 1000000 / (level)) {
+        game_data->timer = end;
+        return (true);
+    }
+    return (false);
 }
 
 bool run_game(game_data_t *game_data, option_t options,
-                                        tetrimino_t **tetrimino_list)
+                                        tetrimino_t *tetrimino_list)
 {
     pos_t board_pos = compute_board_position(options);
+    static tetrimino_t *queue = NULL;
 
     refresh();
     erase();
-    display_board(game_data->board, options.map_size, board_pos);
-    display_frame(game_data->left_panel, board_pos);
+    update_queue(&queue, tetrimino_list);
+    display_all(game_data, queue, options, board_pos);
+    parse_input(game_data, &queue, options);
+    if (!update_game(game_data))
+        return (true);
+    land_tetrimino(game_data, &queue, options);
+    should_break_line(game_data, options);
+    if (game_data->quit) {
+        empty_queue(&queue);
+        return (false);
+    }
     return (true);
 }
 
@@ -36,9 +58,13 @@ int game(option_t options, tetrimino_t **tetrimino_list)
     if (!init_game_data(&game_data, options))
         return (84);
     initscr();
+    cbreak();
+    keypad(stdscr, true);
+    timeout(0);
     start_color();
-    while (run_game(&game_data, options, tetrimino_list));
+    while (run_game(&game_data, options, *tetrimino_list));
     endwin();
     should_save_score(game_data);
+    free_game_data(game_data);
     return (0);
 }

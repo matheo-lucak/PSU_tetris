@@ -1,10 +1,11 @@
 /*
-** EPITECH PROJECT, 2019
+** EPITECH PROJECT, 2020
 ** PSU_tetris_2019
 ** File description:
-** tetris.c
+** tetris
 */
 
+#include <stdlib.h>
 #include "my.h"
 #include "tetris.h"
 

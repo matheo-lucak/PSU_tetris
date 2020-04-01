@@ -63,11 +63,10 @@ static void print_tetrimino_shape(const char * const *shape)
 
 void print_prog_stats(tetrimino_t **tetrimino_list, const option_t options)
 {
-    int index = 0;
-
     my_putstr("*** DEBUG MODE ***\n");
     print_selected_keys(options.control_keys, options.option_keys);
-    my_putstr(options.game_option & DEBUG ? "Next = Yes\n" : "Next = No\n");
+    my_printf("%d\n", options.game_option);
+    my_putstr(options.game_option & NO_NEXT ? "Next = No\n" : "Next = Yes\n");
     my_printf("Level = %u\n", options.level);
     my_printf("Size : %lu*%lu\n", options.map_size.width,
                                     options.map_size.height);
