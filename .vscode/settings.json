@@ -1,6 +1,26 @@
 {
     "files.associations": {
         "set_option.h": "c",
-        "tetris.h": "c"
+        "tetris.h": "c",
+        "my.h": "c",
+        "stdio.h": "c",
+        "stddef.h": "c",
+        "tetris_cell_template.h": "c",
+        "typeinfo": "c",
+        "tetris_frame_template.h": "c",
+        "array": "c",
+        "hash_map": "c",
+        "string_view": "c",
+        "initializer_list": "c",
+        "utility": "c",
+        "stdlib.h": "c",
+        "chrono": "cpp",
+        "functional": "cpp",
+        "istream": "cpp",
+        "ostream": "cpp",
+        "ratio": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp",
+        "variant": "cpp"
     }
 }
