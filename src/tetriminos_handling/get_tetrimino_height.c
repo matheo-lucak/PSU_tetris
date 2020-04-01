@@ -10,7 +10,7 @@
 
 size_t get_tetriminos_height(tetrimino_t *tetrimino)
 {
-    register size_t index = 0;
+    register ssize_t index = 0;
     size_t line_nb = 0;
 
     if (!tetrimino)

@@ -17,19 +17,22 @@ static pos_t compute_board_position(option_t options)
                     (win_dim.y / 2) - (options.map_size.height / 2)});
 }
 
-bool update_game(game_data_t *game_data)
+static bool should_update_game(game_data_t *game_data)
 {
+    static clock_t start = 0;
     clock_t end = clock();
     int level = game_data->left_panel.components[LEVEL].data;
 
-    if (end - game_data->timer > 1000000 / (level)) {
-        game_data->timer = end;
+    if (!start)
+        start = clock();
+    if (end - start > 1000000 / (level)) {
+        start = end;
         return (true);
     }
     return (false);
 }
 
-bool run_game(game_data_t *game_data, option_t options,
+static bool run_game(game_data_t *game_data, option_t options,
                                         tetrimino_t *tetrimino_list)
 {
     pos_t board_pos = compute_board_position(options);
@@ -40,7 +43,7 @@ bool run_game(game_data_t *game_data, option_t options,
     update_queue(&queue, tetrimino_list);
     display_all(game_data, queue, options, board_pos);
     parse_input(game_data, &queue, options);
-    if (!update_game(game_data))
+    if (!should_update_game(game_data))
         return (true);
     land_tetrimino(game_data, &queue, options);
     should_break_line(game_data, options);
@@ -62,7 +65,9 @@ int game(option_t options, tetrimino_t **tetrimino_list)
     keypad(stdscr, true);
     timeout(0);
     start_color();
-    while (run_game(&game_data, options, *tetrimino_list));
+    do {
+        update_timer(game_data.left_panel.components + TIMER);
+    } while (run_game(&game_data, options, *tetrimino_list));
     endwin();
     should_save_score(game_data);
     free_game_data(game_data);

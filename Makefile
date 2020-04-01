@@ -22,6 +22,7 @@ SRC					=	src/tetris.c									\
 						src/game_handling/update_lambda_comp.c			\
 						src/game_handling/update_queue.c				\
 						src/game_handling/update_score.c				\
+						src/game_handling/update_timer.c				\
 						src/initialize/init_frame.c						\
 						src/initialize/init_game_board.c				\
 						src/initialize/init_game_data.c					\

@@ -50,6 +50,8 @@ static void update_new_cursor(game_data_t *game_data, option_t options,
     cursor_cmp = (size_t)game_data->cursor.x + (size_t)queue->alloc_size - 1;
     if (cursor_cmp > options.map_size.width)
         game_data->cursor.x -= queue->alloc_size;
+    if (game_data->cursor.x < 1)
+        game_data->cursor.x = 1;
     if (tetrimino_collide(game_data, options, queue->shapes[queue->rotation],
                                                             game_data->cursor))
         game_data->quit = true;

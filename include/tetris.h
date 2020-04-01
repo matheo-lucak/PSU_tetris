@@ -222,6 +222,7 @@ bool empty_queue(tetrimino_t **queue);
 
 void update_lambda_comp(frame_component_t *component);
 void update_score(game_data_t *game_data);
+void update_timer(frame_component_t *frame);
 
 
 /*
