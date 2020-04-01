@@ -57,6 +57,8 @@ int game(option_t options, tetrimino_t **tetrimino_list)
 
     if (!init_game_data(&game_data, options))
         return (84);
+    my_printf("Press any key to start Tetris\n");
+    read(0, NULL, 1);
     initscr();
     cbreak();
     keypad(stdscr, true);
