@@ -16,11 +16,13 @@ bool my_mass_strcmp(const char *template, ...)
     va_list ap;
 
     va_start(ap, template);
-    while (argument = va_arg(ap, char *)) {
+    argument = va_arg(ap, char *);
+    while (argument) {
         if (!my_strcmp(template, argument)) {
             found_match = true;
             break;
         }
+        argument = va_arg(ap, char *);
     }
     va_end(ap);
     return (found_match);

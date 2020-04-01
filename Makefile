@@ -2,12 +2,13 @@
 ## EPITECH PROJECT, 2019
 ## Makefile
 ## File description:
-## Compiling mmmmh ? Good idea
+## Makefile compilation-handler for tetris program.
 ##
 
 MAIN				=	src/main.c										\
 
-SRC					=	src/debug_mode/get_tetriminos_nb.c				\
+SRC					=	src/tetris.c									\
+						src/debug_mode/get_tetriminos_nb.c				\
 						src/debug_mode/print_prog_stats.c				\
 						src/freeer/free_frame.c							\
 						src/freeer/free_game_data.c						\
@@ -44,8 +45,6 @@ SRC					=	src/debug_mode/get_tetriminos_nb.c				\
 						src/tetriminos_handling/read_tetriminos_dir.c	\
 						src/tetriminos_handling/rotate_tetrimino.c		\
 						src/tetriminos_handling/tetriminos_utils.c		\
-						src/get_randnb.c								\
-						src/tetris.c									\
 
 SRC_TESTS			=	tests/test_file_extension_determ.c				\
 

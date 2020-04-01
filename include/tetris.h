@@ -64,7 +64,7 @@ typedef struct __attribute__((packed))tetrimino_s {
 //Enum for the chosen gamemode.
 typedef enum option_flag_e {
     DEBUG = 1,
-    NEXT = 2
+    NO_NEXT = 2
 } option_flag_t;
 
 //Enum corresponding to the control_keys'index

@@ -41,14 +41,16 @@ static void write_tetrimino_in_board(game_data_t *game_data, tetrimino_t *queue)
 static void update_new_cursor(game_data_t *game_data, option_t options,
                                                         tetrimino_t *queue)
 {
+    size_t cursor_cmp = 0;
+
     if (!queue) {
         game_data->cursor.y = 0;
         return ;
     }
     game_data->cursor.y = (queue->alloc_size * -1) + 1;
-    if (game_data->cursor.x + queue->alloc_size - 1 > options.map_size.width) {
+    cursor_cmp = (size_t)game_data->cursor.x + (size_t)queue->alloc_size - 1;
+    if (cursor_cmp > options.map_size.width)
         game_data->cursor.x -= queue->alloc_size;
-    }
 }
 
 bool land_tetrimino(game_data_t *game_data, tetrimino_t **queue,

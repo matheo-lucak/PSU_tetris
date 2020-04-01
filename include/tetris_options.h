@@ -5,8 +5,8 @@
 ** set_option
 */
 
-#ifndef SET_OPTION_H_
-#define SET_OPTION_H_
+#ifndef TETRIS_OPTIONS_H_
+#define TETRIS_OPTIONS_H_
 
 #include <stdbool.h>
 #include "tetris.h"
@@ -32,7 +32,7 @@ static bool (*set_option_func[])(option_t *, char , char *) = {
     NULL
 };
 
-static struct option const option_template[11] = {
+static const struct option option_template[11] = {
     {.name = "level=", .has_arg = 1, NULL, 'L'},
     {.name = "key-left=", .has_arg = 1, NULL, 'l'},
     {.name = "key-right=", .has_arg = 1, NULL, 'r'},
@@ -46,4 +46,4 @@ static struct option const option_template[11] = {
     {.name = NULL, .has_arg = 0, NULL, 0}
 };
 
-#endif /* !SET_OPTION_H_ */
+#endif /* TETRIS_OPTIONS_H_ */

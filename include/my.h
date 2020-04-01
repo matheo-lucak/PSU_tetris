@@ -76,6 +76,7 @@ int my_strncmp(const char *first, char const *second, const unsigned int n);
 char *my_strcpy(char *dest, char const *src);
 char *my_strcpychar(char *dest, char const *src, char const to_copy);
 char *my_int_to_str(int nb);
+int my_get_randomnb(const int min, const int max);
 
 int my_skip_a_file_line(const int fd);
 

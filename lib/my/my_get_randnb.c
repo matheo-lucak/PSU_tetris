@@ -8,14 +8,14 @@
 #include <stdbool.h>
 #include "stdlib.h"
 
-int get_randomnb(int min, int max)
+int my_get_randomnb(const int min, const int max)
 {
-    static bool i = false;
+    static bool start_randomizer = false;
     int nb = 0;
 
-    if (!i) {
-        srand((size_t)&i);
-        i = true;
+    if (!start_randomizer) {
+        srand((size_t)&start_randomizer);
+        start_randomizer = true;
     }
     if (max == min)
         return (rand() % max);

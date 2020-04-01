@@ -5,6 +5,7 @@
 ** update_queue
 */
 
+#include "my.h"
 #include "tetris.h"
 
 void update_queue(tetrimino_t **queue, tetrimino_t *tetrimino_list)
@@ -16,11 +17,11 @@ void update_queue(tetrimino_t **queue, tetrimino_t *tetrimino_list)
         return ;
     index = number_tetrimino(tetrimino_list);
     if (!(*queue)) {
-        tmp = get_n_tetrimino(tetrimino_list, get_randomnb(0, index));
+        tmp = get_n_tetrimino(tetrimino_list, my_get_randomnb(0, index));
         enqueue_tetrimino(queue, tmp);
     }
     if (*queue && !((*queue)->next)) {
-        tmp = get_n_tetrimino(tetrimino_list, get_randomnb(0, index));
+        tmp = get_n_tetrimino(tetrimino_list, my_get_randomnb(0, index));
         enqueue_tetrimino(queue, tmp);
     }
 }
