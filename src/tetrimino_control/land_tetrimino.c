@@ -14,7 +14,6 @@ static void write_tetrimino_cell_in_board(game_data_t *game_data,
                                             pos_t offset)
 {
     if (pos.y + offset.y < 1) {
-        game_data->quit = true;
         return ;
     }
     if (queue->shapes[queue->rotation][offset.y][offset.x] == '*') {
@@ -47,10 +46,13 @@ static void update_new_cursor(game_data_t *game_data, option_t options,
         game_data->cursor.y = 0;
         return ;
     }
-    game_data->cursor.y = (queue->alloc_size * -1) + 1;
+    game_data->cursor.y = -get_tetriminos_height(queue) + 2;
     cursor_cmp = (size_t)game_data->cursor.x + (size_t)queue->alloc_size - 1;
     if (cursor_cmp > options.map_size.width)
         game_data->cursor.x -= queue->alloc_size;
+    if (tetrimino_collide(game_data, options, queue->shapes[queue->rotation],
+                                                            game_data->cursor))
+        game_data->quit = true;
 }
 
 bool land_tetrimino(game_data_t *game_data, tetrimino_t **queue,

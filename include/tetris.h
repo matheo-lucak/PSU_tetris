@@ -150,6 +150,8 @@ void get_tetrimino(tetrimino_t *node, const char file_name[]);
 
 char **get_blank_tetrimino(size_t alloc_size);
 
+size_t get_tetriminos_height(tetrimino_t *tetrimino);
+
 //Fills all the oriented shapes such as:
 //-RIGHTSIDE
 //-DOWNSIDE
