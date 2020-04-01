@@ -32,6 +32,8 @@ typedef struct pos_s {
     ssize_t y;
 } pos_t;
 
+#define VEC(x, y) (pos_t) {x, y}
+
 typedef enum shape_valid_e {
     VOID,
     CORRECT,

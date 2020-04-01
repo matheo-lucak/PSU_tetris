@@ -10,6 +10,8 @@
 static bool tetrimino_collide_cell(game_data_t *game_data, char **shape,
                                                 pos_t pos, pos_t offset)
 {
+    if (pos.y + offset.y < 0 || pos.x + offset.x < 0)
+        return (false);
     if (shape[offset.y][offset.x] == '*' &&
         game_data->board[pos.y + offset.y][pos.x + offset.x].cell == '*')
         return (true);
@@ -40,14 +42,11 @@ bool tetrimino_collide(game_data_t *game_data, option_t options,
     register size_t y = 0;
     register bool collide = false;
 
-    if (pos.y < 0)
-        return (false);
     for (y = 0; shape[y] && !collide; y += 1) {
         for (x = 0; shape[y][x] && !collide; x += 1) {
-            collide = tetrimino_outside_board(options, shape, pos,
-                                                    (pos_t){x, y});
-            collide |= tetrimino_collide_cell(game_data, shape, pos,
-                                                    (pos_t){x, y});
+            collide = tetrimino_outside_board(options, shape, pos, VEC(x, y))
+                    ? true :
+                    tetrimino_collide_cell(game_data, shape, pos, VEC(x, y));
         }
     }
     return (collide);
