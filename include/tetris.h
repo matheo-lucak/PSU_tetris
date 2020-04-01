@@ -230,6 +230,9 @@ void update_score(game_data_t *game_data);
 
 void display_tetrimino(tetrimino_t *tetrimino, pos_t board_pos, pos_t pos);
 
+void display_shadow(game_data_t *game_data, tetrimino_t *queue,
+                            option_t options, pos_t board_pos);
+
 void display_board(cell_t **board, dimensions_t size, pos_t pos);
 
 void display_frame(frame_t frame, pos_t middle_pos, dimensions_t midde_size);

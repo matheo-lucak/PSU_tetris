@@ -42,7 +42,8 @@ bool run_game(game_data_t *game_data, option_t options,
     parse_input(game_data, &queue, options);
     if (!update_game(game_data))
         return (true);
-    land_tetrimino(game_data, &queue, options);
+    if (land_tetrimino(game_data, &queue, options))
+        game_data->cursor.y += 1;
     should_break_line(game_data, options);
     if (game_data->quit) {
         empty_queue(&queue);

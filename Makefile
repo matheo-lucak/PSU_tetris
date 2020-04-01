@@ -15,6 +15,7 @@ SRC					=	src/debug_mode/get_tetriminos_nb.c				\
 						src/game_handling/display_all.c					\
 						src/game_handling/display_board.c				\
 						src/game_handling/display_frame.c				\
+						src/game_handling/display_shadow.c				\
 						src/game_handling/display_tetrimino.c			\
 						src/game_handling/run_game.c					\
 						src/game_handling/update_lambda_comp.c			\
