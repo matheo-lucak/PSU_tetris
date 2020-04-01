@@ -72,7 +72,7 @@ typedef enum key_code_e {
     KEY_CODE_DROP = 3,
 } key_code_t;
 
-typedef struct __attribute__((packed))option_s {
+typedef struct option_s {
     unsigned int level;
     unsigned int game_option : 2;
     dimensions_t map_size;
