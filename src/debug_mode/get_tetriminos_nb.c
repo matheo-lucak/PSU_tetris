@@ -2,10 +2,11 @@
 ** EPITECH PROJECT, 2019
 ** PSU_tetris_2019
 ** File description:
-** get_tetriminos_nb.c
+** Get the nb of tetriminos in the list.
 */
 
 #include "tetris.h"
+#include "my.h"
 
 size_t get_tetriminos_nb(tetrimino_t **head)
 {
@@ -16,9 +17,9 @@ size_t get_tetriminos_nb(tetrimino_t **head)
         return (0);
     tmp = *head;
     do {
-        tmp = tmp->next;
-        if (tmp && !tmp->error)
+        if (!tmp->error)
             nb += 1;
+        tmp = tmp->next;
     } while (tmp != *head);
     return (nb);
 }

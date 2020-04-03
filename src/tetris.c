@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2020
 ** PSU_tetris_2019
 ** File description:
-** tetris
+** Main tetris overview of what's happening.
 */
 
 #include <stdlib.h>

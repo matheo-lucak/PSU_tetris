@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2020
-** Visual Studio Live Share (Workspace)
+** PSU_tetris_2019
 ** File description:
-** main
+** Main function of the tetris program.
 */
 
 #include "my.h"
