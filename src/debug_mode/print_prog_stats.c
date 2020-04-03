@@ -29,7 +29,7 @@ static void print_selected_keys(const int control_keys[4],
     register size_t i = 0;
     register size_t nb_key_print = 0;
     const char *keys[] = {"Key Left : ", "Key Right : ", "Key Turn : ",
-                            "Key Quit : ", "Key Pause : ", NULL};
+                        "Key Drop : ", "Key Quit : ", "Key Pause : ", NULL};
 
     while (i < 4) {
         my_putstr(keys[nb_key_print]);
@@ -53,4 +53,5 @@ void print_prog_stats(tetrimino_t **head, const option_t opt)
     my_printf("Level = %u\n", opt.level);
     my_printf("Size : %lu*%lu\n", opt.map_size.width, opt.map_size.height);
     my_printf("Tetriminos: %lu\n", get_tetriminos_nb(head));
+    print_tetrimino_list(head);
 }

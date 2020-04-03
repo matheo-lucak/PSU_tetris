@@ -24,10 +24,11 @@ static void free_tetriminos_node(tetrimino_t *node)
 void free_tetriminos_list(tetrimino_t *head)
 {
     tetrimino_t *tmp = NULL;
-    tetrimino_t *save = head->prev;
+    tetrimino_t *save = NULL;
 
     if (!head)
         return;
+    save = head->prev;
     for (tmp = head; tmp != save; tmp = head) {
         head = head->next;
         if (tmp)

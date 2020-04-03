@@ -9,18 +9,15 @@
 
 static void print_shape_char(const char *shape_line, size_t *x)
 {
-    size_t tmp = *x;
-    size_t star_finder = 0;
+    size_t star_finder = *x;
 
-    if (shape_line[tmp] == ' ') {
-        star_finder = tmp;
-        while (shape_line[star_finder] && shape_line[star_finder++] != '*');
-        if (!shape_line[star_finder]) {
-            *x = star_finder;
+    if (shape_line[(*x)] == ' ') {
+        while (shape_line[star_finder] == ' ')
+            star_finder += 1;
+        if (!shape_line[star_finder])
             return;
-        }
     }
-    my_putchar(shape_line[tmp]);
+    my_putchar(shape_line[(*x)]);
 }
 
 void print_tetrimino_shape(char **shape)
@@ -30,10 +27,11 @@ void print_tetrimino_shape(char **shape)
 
     if (!shape)
         return;
-    while (shape[y]) {
+    for (; shape[y]; y += 1) {
+        if (!find_char_in_str(shape[y], '*'))
+            continue;
         for (x = 0; shape[y][x]; x += 1)
             print_shape_char(shape[y], &x);
         my_putchar('\n');
-        y += 1;
     }
 }

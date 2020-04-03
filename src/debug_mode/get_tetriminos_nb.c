@@ -17,8 +17,7 @@ size_t get_tetriminos_nb(tetrimino_t **head)
         return (0);
     tmp = *head;
     do {
-        if (!tmp->error)
-            nb += 1;
+        nb += 1;
         tmp = tmp->next;
     } while (tmp != *head);
     return (nb);

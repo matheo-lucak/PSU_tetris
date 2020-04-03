@@ -34,6 +34,7 @@ int tetris(const int ac, char * const av[])
 {
     tetrimino_t *tetrimino_list = NULL;
     option_t options;
+    int game_return_value = 0;
 
     set_default_options(&options);
     if (!parse_option(ac, av, &options))
@@ -45,7 +46,7 @@ int tetris(const int ac, char * const av[])
         if (!check_for_input())
             return (0);
     }
-    game(options, &tetrimino_list);
+    game_return_value = game(options, &tetrimino_list);
     free_tetriminos_list(tetrimino_list);
-    return (0);
+    return (game_return_value);
 }

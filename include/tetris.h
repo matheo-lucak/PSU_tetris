@@ -180,6 +180,7 @@ size_t get_tetriminos_nb(tetrimino_t **head);
 size_t number_tetrimino(tetrimino_t *tetrimino_list);
 tetrimino_t *get_n_tetrimino(tetrimino_t *tetrimino_list, size_t n);
 
+void print_tetrimino_list(tetrimino_t **head);
 void print_tetrimino_shape(char **shape);
 void print_prog_stats(tetrimino_t **tetrimino_list, const option_t options);
 

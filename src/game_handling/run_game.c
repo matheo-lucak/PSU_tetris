@@ -54,11 +54,25 @@ static bool run_game(game_data_t *game_data, option_t options,
     return (true);
 }
 
+static bool check_for_available_tetriminos(tetrimino_t **head)
+{
+    tetrimino_t *tmp = NULL;
+
+    if (!head || !(*head))
+        return (false);
+    for (tmp = *head; tmp != (*head)->prev;tmp = tmp->next) {
+        if (!(tmp->error))
+            return (true);
+    }
+    return (!tmp->error) ? true : false;
+}
+
 int game(option_t options, tetrimino_t **tetrimino_list)
 {
     game_data_t game_data;
 
-    if (!init_game_data(&game_data, options))
+    if (!check_for_available_tetriminos(tetrimino_list)
+        || !init_game_data(&game_data, options))
         return (84);
     initscr();
     cbreak();

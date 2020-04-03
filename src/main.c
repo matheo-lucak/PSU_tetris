@@ -27,11 +27,16 @@ static bool should_print_usage(const int ac, char * const av[])
 
 int main(const int ac, char * const av[])
 {
+    int tetris_end_value = 0;
+
     if (ac < 1 || !av || !av[0])
         return (84);
     if (should_print_usage(ac, av)) {
         print_usage(av[0]);
         return (0);
     }
-    return (tetris(ac, av));
+    tetris_end_value = tetris(ac, av);
+    if (tetris_end_value == 84)
+        print_usage(av[0]);
+    return (tetris_end_value);
 }
