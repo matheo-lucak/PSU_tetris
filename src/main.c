@@ -19,15 +19,15 @@ static bool should_print_usage(const int ac, char * const av[])
     register int index = 0;
 
     for (index = 0; index < ac; index += 1) {
-        if (my_mass_strcmp(av[index], "-h", "--help"))
-            return (true);
+        if (my_mass_strcmp(av[index], "-h", "--help", NULL))
+            return (1);
     }
-    return (false);
+    return (0);
 }
 
 int main(const int ac, char * const av[])
 {
-    int tetris_end_value = 0;
+    int tetris_end = 0;
 
     if (ac < 1 || !av || !av[0])
         return (84);
@@ -35,8 +35,8 @@ int main(const int ac, char * const av[])
         print_usage(av[0]);
         return (0);
     }
-    tetris_end_value = tetris(ac, av);
-    if (tetris_end_value == 84)
+    tetris_end = tetris(ac, av);
+    if (tetris_end == 84)
         print_usage(av[0]);
-    return (tetris_end_value);
+    return (tetris_end);
 }
