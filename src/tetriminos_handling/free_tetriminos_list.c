@@ -36,5 +36,4 @@ void free_tetriminos_list(tetrimino_t *head)
     }
     if (tmp)
         free_tetriminos_node(tmp);
-    head = NULL;
 }

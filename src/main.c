@@ -20,9 +20,9 @@ static bool should_print_usage(const int ac, char * const av[])
 
     for (index = 0; index < ac; index += 1) {
         if (my_mass_strcmp(av[index], "-h", "--help", NULL))
-            return (1);
+            return (true);
     }
-    return (0);
+    return (false);
 }
 
 int main(const int ac, char * const av[])

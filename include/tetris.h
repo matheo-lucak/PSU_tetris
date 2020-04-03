@@ -179,6 +179,8 @@ bool file_extension_determ(const char file_name[], const char extension[]);
 size_t get_tetriminos_nb(tetrimino_t **head);
 size_t number_tetrimino(tetrimino_t *tetrimino_list);
 tetrimino_t *get_n_tetrimino(tetrimino_t *tetrimino_list, size_t n);
+bool is_list_sorted(tetrimino_t **head);
+void sort_tetrimino_list(tetrimino_t **head);
 
 void print_tetrimino_list(tetrimino_t **head);
 void print_tetrimino_shape(char **shape);

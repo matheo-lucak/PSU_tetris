@@ -37,11 +37,10 @@ static void print_selected_keys(const int control_keys[4],
         nb_key_print += 1;
         i += 1;
     }
-    for (i = 0; i < (size_t)(my_arrlen((char **)keys) - 4); i += 1) {
+    for (i = 0; keys[nb_key_print]; i += 1) {
         my_putstr(keys[nb_key_print]);
         print_key(options_keys[i]);
         nb_key_print += 1;
-        i += 1;
     }
 }
 
@@ -53,5 +52,6 @@ void print_prog_stats(tetrimino_t **head, const option_t opt)
     my_printf("Level = %u\n", opt.level);
     my_printf("Size : %lu*%lu\n", opt.map_size.width, opt.map_size.height);
     my_printf("Tetriminos: %lu\n", get_tetriminos_nb(head));
+    sort_tetrimino_list(head);
     print_tetrimino_list(head);
 }
