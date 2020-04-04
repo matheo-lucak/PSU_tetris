@@ -17,8 +17,8 @@ int my_get_randomnb(const int min, const int max)
         srand((size_t)&start_randomizer);
         start_randomizer = true;
     }
-    if (max == min)
-        return (rand() % max);
+    if (!max || (max == min))
+        return (max);
     nb = rand() % (max - min) + min;
     return (nb);
 }

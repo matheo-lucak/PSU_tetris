@@ -88,3 +88,44 @@ Test(queue_tests, enqueue_success_two_tetri)
     else
         cr_assert(0);
 }
+
+Test(queue_tests, update_queue_fail_1)
+{
+    tetrimino_t *queue = NULL;
+
+    cr_assert(!update_queue(&queue, NULL));
+}
+
+Test(queue_tests, update_queue_fail_2)
+{
+    tetrimino_t *tetri = malloc(sizeof(tetrimino_t));
+
+    cr_assert(!update_queue(NULL, tetri));
+}
+
+Test(queue_tests, update_queue_success_1)
+{
+    tetrimino_t *queue = NULL;
+    tetrimino_t *tetri = malloc(sizeof(tetrimino_t));
+
+    if (!tetri)
+        cr_assert(1);
+    my_memset((char *)tetri, 0, sizeof(tetrimino_t));
+    tetri->next = tetri;
+    tetri->prev = tetri;
+    cr_assert(update_queue(&queue, tetri));
+}
+
+Test(queue_tests, update_queue_success_2)
+{
+    tetrimino_t *queue = NULL;
+    tetrimino_t *tetri = malloc(sizeof(tetrimino_t));
+
+    if (!tetri)
+        cr_assert(1);
+    my_memset((char *)tetri, 0, sizeof(tetrimino_t));
+    tetri->next = tetri;
+    tetri->prev = tetri;
+    update_queue(&queue, tetri);
+    cr_assert(update_queue(&queue, tetri));
+}

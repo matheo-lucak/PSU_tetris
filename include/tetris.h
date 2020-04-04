@@ -319,7 +319,7 @@ void rotate_tetrimino(game_data_t *game_data, option_t options,
 void drop_tetrimino(game_data_t *game_data, tetrimino_t **queue,
                                                 option_t options);
 
-void update_queue(tetrimino_t **queue, tetrimino_t *tetrimino_list);
+bool update_queue(tetrimino_t **queue, tetrimino_t *tetrimino_list);
 
 bool land_tetrimino(game_data_t *game_data, tetrimino_t **queue,
                                                 option_t options);

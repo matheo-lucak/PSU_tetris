@@ -8,20 +8,17 @@
 #include "my.h"
 #include "tetris.h"
 
-void update_queue(tetrimino_t **queue, tetrimino_t *tetrimino_list)
+bool update_queue(tetrimino_t **queue, tetrimino_t *tetrimino_list)
 {
     tetrimino_t *tmp = NULL;
     size_t index = 0;
 
     if (!queue)
-        return ;
+        return (false);
     index = number_tetrimino(tetrimino_list);
-    if (!(*queue)) {
+    if (!(*queue) || !((*queue)->next)) {
         tmp = get_n_tetrimino(tetrimino_list, my_get_randomnb(0, index));
-        enqueue_tetrimino(queue, tmp);
+        return (enqueue_tetrimino(queue, tmp));
     }
-    if (*queue && !((*queue)->next)) {
-        tmp = get_n_tetrimino(tetrimino_list, my_get_randomnb(0, index));
-        enqueue_tetrimino(queue, tmp);
-    }
+    return (false);
 }
