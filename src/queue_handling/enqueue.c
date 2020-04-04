@@ -22,15 +22,15 @@ static void enqueue_new_tetrimino(tetrimino_t *queue,
     queue->next = tetrimino;
 }
 
-void enqueue_tetrimino(tetrimino_t **queue, tetrimino_t *tetrimino)
+bool enqueue_tetrimino(tetrimino_t **queue, tetrimino_t *tetrimino)
 {
     tetrimino_t *new_tetrimino = NULL;
 
     if (!queue || !tetrimino)
-        return ;
+        return (false);
     new_tetrimino = malloc(sizeof(tetrimino_t));
     if (!new_tetrimino)
-        return ;
+        return (false);
     my_memcpy(new_tetrimino, tetrimino, sizeof(tetrimino_t));
     new_tetrimino->next = NULL;
     new_tetrimino->prev = NULL;
@@ -39,4 +39,5 @@ void enqueue_tetrimino(tetrimino_t **queue, tetrimino_t *tetrimino)
     } else {
         enqueue_new_tetrimino(*queue, new_tetrimino);
     }
+    return (true);
 }

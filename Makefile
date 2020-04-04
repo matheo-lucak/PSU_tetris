@@ -79,7 +79,7 @@ debug:					clean $(LIB) $(OBJ)
 tests_run:				LDLIBS += -lcriterion --coverage
 tests_run:				CFLAGS += --coverage
 tests_run:				$(LIB)
-						$(CC) -o $@ $(SRC) $(SRC_TESTS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS)
+						$(CC) -o $@ $(SRC) tests/* $(CPPFLAGS) $(LDFLAGS) $(LDLIBS)
 						./$@
 						mv *.gc* tests/
 						$(RM) $@

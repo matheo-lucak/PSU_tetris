@@ -96,7 +96,7 @@ typedef enum cell_style_s {
 } cell_style_t;
 
 typedef struct frame_component_s {
-    int data;
+    ssize_t data;
     char *display_str;
     char display_str_color;
     char *name;
@@ -119,7 +119,6 @@ typedef struct game_data_s {
     frame_t left_panel;
     frame_t right_panel;
     pos_t cursor;
-    clock_t timer;
     bool quit;
 } game_data_t;
 
@@ -216,8 +215,8 @@ bool init_right_pannel(frame_t *frame,
 ** ******************
 */
 
-void enqueue_tetrimino(tetrimino_t **queue, tetrimino_t *tetrimino);
-void dequeue_tetrimino(tetrimino_t **queue);
+bool enqueue_tetrimino(tetrimino_t **queue, tetrimino_t *tetrimino);
+bool dequeue_tetrimino(tetrimino_t **queue);
 bool empty_queue(tetrimino_t **queue);
 
 void update_lambda_comp(frame_component_t *component);

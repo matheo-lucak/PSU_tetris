@@ -21,9 +21,9 @@ static char *create_time_code(int seconds, int minutes)
     if (!s_str || !m_str)
         return (NULL);
     tmp = my_strcat(m_str, ":");
+    tmp2 = my_strcat(tmp, s_str);
     free(s_str);
     free(m_str);
-    tmp2 = my_strcat(tmp, s_str);
     if (tmp)
         free(tmp);
     return (tmp2);
@@ -31,7 +31,7 @@ static char *create_time_code(int seconds, int minutes)
 
 void update_timer(frame_component_t *frame)
 {
-    int absolute_time = time(NULL) - frame->data;
+    int absolute_time = (clock() - frame->data) / CLOCKS_PER_SEC;
     int seconds = absolute_time % 60;
     int minutes = absolute_time / 60;
 

@@ -23,7 +23,6 @@ bool init_game_data(game_data_t *game_data, option_t options)
     if (!init_right_pannel(&(game_data->right_panel), options))
         return (false);
     game_data->cursor.x = options.map_size.width / 2;
-    game_data->timer = time(NULL);
-    game_data->left_panel.components[TIMER].data = time(NULL);
+    game_data->left_panel.components[TIMER].data = clock();
     return (true);
 }

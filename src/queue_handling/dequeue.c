@@ -8,13 +8,14 @@
 #include <stdlib.h>
 #include "tetris.h"
 
-void dequeue_tetrimino(tetrimino_t **queue)
+bool dequeue_tetrimino(tetrimino_t **queue)
 {
     tetrimino_t *save = NULL;
 
     if (!queue || !(*queue))
-        return ;
+        return (false);
     save = *queue;
     *queue = (*queue)->next;
     free(save);
+    return (true);
 }
