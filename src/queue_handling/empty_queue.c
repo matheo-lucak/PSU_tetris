@@ -11,8 +11,7 @@ bool empty_queue(tetrimino_t **queue)
 {
     if (!queue)
         return (false);
-    while (*queue) {
+    while (*queue)
         dequeue_tetrimino(queue);
-    }
     return (true);
 }

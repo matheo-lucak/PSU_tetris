@@ -36,16 +36,16 @@ static void fill_board_edge(cell_t **board, dimensions_t map_size,
                                                 cell_style_t style)
 {
     my_memcpy(board[0], nw_cell + style, sizeof(cell_t));
-    my_memcpy(board[map_size.height + 1] + map_size.width + 1, se_cell + style,
-                                                            sizeof(cell_t));
+    my_memcpy(board[map_size.height + 1] + map_size.width + 1,
+                se_cell + style, sizeof(cell_t));
     my_memcpy(board[map_size.height + 1], sw_cell + style, sizeof(cell_t));
     my_memcpy(board[0] + map_size.width + 1, ne_cell + style, sizeof(cell_t));
 }
 
 cell_t **create_board(dimensions_t size, cell_style_t style)
 {
-    cell_t **board = NULL;
     register size_t index = 0;
+    cell_t **board = NULL;
 
     board = malloc(sizeof(cell_t *) * (size.height + 3));
     if (!board)

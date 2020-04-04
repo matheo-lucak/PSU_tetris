@@ -23,10 +23,9 @@ void display_board(cell_t **board, dimensions_t size, pos_t pos)
 
     if (!board)
         return ;
-    for (y = 0; y < size.height + 2; y += 1) {
-        for (x = 0; x < size.width + 2; x += 1) {
-            display_cell(board[y][x],
-                        pos.x + x, pos.y + y);
-        }
+    while (y < size.height + 2) {
+        for (x = 0; x < size.width + 2; x += 1)
+            display_cell(board[y][x], pos.x + x, pos.y + y);
+        y += 1;
     }
 }

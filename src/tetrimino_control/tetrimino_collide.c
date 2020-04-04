@@ -8,7 +8,7 @@
 #include "tetris.h"
 
 static bool tetrimino_collide_cell(game_data_t *game_data, char **shape,
-                                                pos_t pos, pos_t offset)
+                                    pos_t pos, pos_t offset)
 {
     if (pos.y + offset.y < 0 || pos.x + offset.x < 0)
         return (false);
@@ -19,24 +19,21 @@ static bool tetrimino_collide_cell(game_data_t *game_data, char **shape,
 }
 
 static bool tetrimino_outside_board(option_t options, char **shape,
-                                                pos_t pos, pos_t offset)
+                                        pos_t pos, pos_t offset)
 {
     if (shape[offset.y][offset.x] != '*')
         return (false);
-    if (pos.y + offset.y > (ssize_t)options.map_size.height) {
+    if (pos.y + offset.y > (ssize_t)options.map_size.height)
         return (true);
-    }
-    if (pos.x + offset.x < 1) {
+    if (pos.x + offset.x < 1)
         return (true);
-    }
-    if (pos.x + offset.x > (ssize_t)options.map_size.width) {
+    if (pos.x + offset.x > (ssize_t)options.map_size.width)
         return (true);
-    }
     return (false);
 }
 
 bool tetrimino_collide(game_data_t *game_data, option_t options,
-                                                char **shape, pos_t pos)
+                        char **shape, pos_t pos)
 {
     register size_t x = 0;
     register size_t y = 0;

@@ -5,7 +5,6 @@
 ** free_game_data
 */
 
-#include <stdlib.h>
 #include "my.h"
 #include "tetris.h"
 

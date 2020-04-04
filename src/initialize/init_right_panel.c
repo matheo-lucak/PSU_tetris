@@ -17,7 +17,7 @@ bool init_right_pannel(frame_t *frame,
     my_memcpy(frame, &right_panel_template, sizeof(frame_t));
     frame->board = create_board(frame->size, frame->style);
     frame->components = malloc(sizeof(frame_component_t) *
-                                            (frame->component_nb));
+                                        (frame->component_nb));
     if (!(frame->board) || !(frame->components))
         return (false);
     if (!init_frame_component(&(frame->components[NEXT_TETRI]),

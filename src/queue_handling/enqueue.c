@@ -34,10 +34,9 @@ bool enqueue_tetrimino(tetrimino_t **queue, tetrimino_t *tetrimino)
     my_memcpy(new_tetrimino, tetrimino, sizeof(tetrimino_t));
     new_tetrimino->next = NULL;
     new_tetrimino->prev = NULL;
-    if (!(*queue)) {
+    if (!(*queue))
         enqueue_first_tetrimino(queue, new_tetrimino);
-    } else {
+    else
         enqueue_new_tetrimino(*queue, new_tetrimino);
-    }
     return (true);
 }

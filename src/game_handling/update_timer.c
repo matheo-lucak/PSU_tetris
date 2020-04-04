@@ -9,7 +9,7 @@
 #include "my.h"
 #include "tetris.h"
 
-static char *create_time_code(int seconds, int minutes)
+static char *create_time_code(const int seconds, const int minutes)
 {
     char *tmp = NULL;
     char *tmp2 = NULL;
