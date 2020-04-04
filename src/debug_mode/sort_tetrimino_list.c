@@ -5,11 +5,12 @@
 ** sort_tetrimino_list.c
 */
 
+#include <stdlib.h>
 #include "my.h"
 #include "tetris.h"
 
-static void swap_tetrimino_nodes(tetrimino_t **head,
-                                tetrimino_t *first, tetrimino_t *second)
+static void swap_tetrimino_nodes(tetrimino_t **head, tetrimino_t *first,
+                                    tetrimino_t *second)
 {
     tetrimino_t *fir_prev = NULL;
     tetrimino_t *sec_next = NULL;
@@ -31,6 +32,22 @@ static void swap_tetrimino_nodes(tetrimino_t **head,
         *head = second;
 }
 
+static void reset_pointers_values(tetrimino_t *tmp, char **tmp_first,
+                                char **tmp_second, int *cmp_reason)
+{
+    *tmp_first = my_strdup_lowercase(tmp->prev->name);
+    *tmp_second = my_strdup_lowercase(tmp->name);
+    *cmp_reason = my_strcmp(*tmp_first, *tmp_second);
+}
+
+static void free_tmps(char *tmp_first, char *tmp_second)
+{
+    if (tmp_first)
+        free(tmp_first);
+    if (tmp_second)
+        free(tmp_second);
+}
+
 void sort_tetrimino_list(tetrimino_t **head)
 {
     tetrimino_t *tmp = NULL;
@@ -43,9 +60,7 @@ void sort_tetrimino_list(tetrimino_t **head)
     for (tmp = (*head)->next; !is_list_sorted(head); tmp = tmp->next) {
         if (tmp == (*head))
             tmp = tmp->next;
-        tmp_first = my_strdup_lowercase(tmp->prev->name);
-        tmp_second = my_strdup_lowercase(tmp->name);
-        cmp_reason = my_strcmp(tmp_first, tmp_second);
+        reset_pointers_values(tmp, &tmp_first, &tmp_second, &cmp_reason);
         if (cmp_reason > 0)
             swap_tetrimino_nodes(head, tmp->prev, tmp);
         else if (cmp_reason == 0) {
@@ -53,5 +68,6 @@ void sort_tetrimino_list(tetrimino_t **head)
             if (cmp_reason > 0)
                 swap_tetrimino_nodes(head, tmp->prev, tmp);
         }
+        free_tmps(tmp_first, tmp_second);
     }
 }

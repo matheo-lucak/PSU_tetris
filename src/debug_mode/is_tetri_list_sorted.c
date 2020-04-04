@@ -19,6 +19,14 @@ static bool free_check_list_resources(char *tmp_first, char *tmp_second,
     return (return_val);
 }
 
+static void reset_pointers_values(tetrimino_t *tmp, char **tmp_first,
+                                char **tmp_second, int *cmp_reason)
+{
+    *tmp_first = my_strdup_lowercase(tmp->prev->name);
+    *tmp_second = my_strdup_lowercase(tmp->name);
+    *cmp_reason = my_strcmp(*tmp_first, *tmp_second);
+}
+
 bool is_list_sorted(tetrimino_t **head)
 {
     tetrimino_t *tmp = NULL;
@@ -30,9 +38,7 @@ bool is_list_sorted(tetrimino_t **head)
         return (true);
     tmp = (*head)->next;
     do {
-        tmp_first = my_strdup_lowercase(tmp->prev->name);
-        tmp_second = my_strdup_lowercase(tmp->name);
-        cmp_reason = my_strcmp(tmp_first, tmp_second);
+        reset_pointers_values(tmp, &tmp_first, &tmp_second, &cmp_reason);
         if (cmp_reason > 0)
             return (free_check_list_resources(tmp_first, tmp_second, 0));
         if (cmp_reason == 0) {
@@ -41,6 +47,7 @@ bool is_list_sorted(tetrimino_t **head)
                 return (free_check_list_resources(tmp_first, tmp_second, 0));
         }
         tmp = tmp->next;
+        free_check_list_resources(tmp_first, tmp_second, 1);
     } while (tmp != (*head));
-    return (free_check_list_resources(tmp_first, tmp_second, 1));
+    return (true);
 }
