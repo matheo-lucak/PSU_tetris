@@ -93,8 +93,8 @@ tests_run:				$(LIB)
 						$(RM) $@
 
 coverage:
-						gcovr --exclude ./tests/
-						gcovr --exclude ./tests/ --branches
+						gcovr --exclude tests/
+						gcovr --exclude tests/ --branches
 
 clean:
 						$(RM) $(OBJ)
