@@ -8,17 +8,12 @@
 #ifndef TETRIS_H_
 #define TETRIS_H_
 
+
 #include <stdbool.h>
-#include <stddef.h>
 #include <unistd.h>
 #include <time.h>
 #include <ncurses.h>
 
-//Defines the position of a 2d int vector.
-typedef struct vector2i_s {
-    long int x;
-    long int y;
-} vector2i_t;
 
 //Defines the boundaries of a component.
 typedef struct dimensions_s {
@@ -26,13 +21,16 @@ typedef struct dimensions_s {
     size_t height;
 } dimensions_t;
 
-//Defines the positions of a component.
+
+//Defines the position of a component.
 typedef struct pos_s {
     ssize_t x;
     ssize_t y;
 } pos_t;
 
-#define VEC(x, y) (pos_t) {x, y}
+
+#define VEC(x, y) (pos_t){x, y}
+
 
 typedef enum shape_valid_e {
     VOID,
@@ -40,15 +38,16 @@ typedef enum shape_valid_e {
     INCORRECT
 } shape_valid_t;
 
-typedef enum orientation_e
-{
+
+typedef enum orientation_e {
     UPSIDE,
     RIGHTSIDE,
     DOWNSIDE,
     LEFTSIDE
 } orientation_t;
 
-//A tetrimino characteristics.
+
+//A tetrimino's characteristics.
 typedef struct tetrimino_s {
     char **shapes[4];
     char *name;
@@ -61,13 +60,15 @@ typedef struct tetrimino_s {
     struct tetrimino_s *prev;
 } tetrimino_t;
 
+
 //Enum for the chosen gamemode.
 typedef enum option_flag_e {
     DEBUG = 1,
     NO_NEXT = 2
 } option_flag_t;
 
-//Enum corresponding to the control_keys'index
+
+//Enum corresponding to the control_keys index
 typedef enum key_code_e {
     KEY_CODE_LEFT = 0,
     KEY_CODE_RIGHT = 1,
@@ -77,6 +78,7 @@ typedef enum key_code_e {
     KEY_CODE_PAUSE = 1,
 } key_code_t;
 
+
 typedef struct option_s {
     unsigned int level;
     unsigned int game_option : 2;
@@ -85,15 +87,18 @@ typedef struct option_s {
     int option_keys[2];
 } option_t;
 
+
 typedef struct cell_s {
     char cell;
     char color;
 } cell_t;
 
+
 typedef enum cell_style_s {
     STYLE_0,
     STYLE_1
 } cell_style_t;
+
 
 typedef struct frame_component_s {
     ssize_t data;
@@ -103,6 +108,7 @@ typedef struct frame_component_s {
     char name_color;
     pos_t pos;
 } frame_component_t;
+
 
 typedef struct frame_s {
     cell_t **board;
@@ -114,6 +120,7 @@ typedef struct frame_s {
     frame_component_t *components;
 } frame_t;
 
+
 typedef struct game_data_s {
     cell_t **board;
     frame_t left_panel;
@@ -122,6 +129,17 @@ typedef struct game_data_s {
     bool quit;
 } game_data_t;
 
+
+
+/*
+** ******************
+** | Option Parsing |
+** ******************
+*/
+
+//Parses all of the given options.
+//
+//If a flag isn't found, returns false (0).
 bool parse_option(const int ac, char * const av[], option_t *options);
 
 /*
@@ -177,10 +195,18 @@ bool file_extension_determ(const char file_name[], const char extension[]);
 ** **************
 */
 
+//Returns the number of tetriminos in a list of tetriminos.
 size_t get_tetriminos_nb(tetrimino_t **head);
+//Returns the number of tetriminos in a list of tetriminos.
 size_t number_tetrimino(tetrimino_t *tetrimino_list);
-tetrimino_t *get_n_tetrimino(tetrimino_t *tetrimino_list, size_t n);
+
+//Returns the n tetrimino in a list of tetriminos.
+tetrimino_t *get_n_tetrimino(tetrimino_t *tetrimino_list, const size_t n);
+
+//Checks whether a tetrimino list is sorted.
 bool is_list_sorted(tetrimino_t **head);
+
+//Sorts a tetrimino list by ASCII, non-case sensitive order.
 void sort_tetrimino_list(tetrimino_t **head);
 
 void print_tetrimino_list(tetrimino_t **head);
