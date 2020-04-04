@@ -149,8 +149,12 @@ void get_tetrimino(tetrimino_t *node, const char file_name[]);
 
 bool fill_shape(const int fd, tetrimino_t *node);
 
+//Returns a square blank tetrimino full of ' ' with alloc_size
 char **get_blank_tetrimino(size_t alloc_size);
 
+//Returns the height of a tetrimino
+//Height is computed of alloc size minus all full 'space' line detached to
+//tetrimino body
 size_t get_tetriminos_height(tetrimino_t *tetrimino);
 
 //Fills all the oriented shapes such as:
@@ -220,10 +224,23 @@ bool init_right_pannel(frame_t *frame,
 ** ******************
 */
 
+//Adds a new tetrimino in queue by allocating it
+//Pushes it at the end of the queue
+//Returns 1 if there's no issue.
+//Returns 0 otherwise.
 bool enqueue_tetrimino(tetrimino_t **queue, tetrimino_t *tetrimino);
+
+//Remove and free first tetrimino of the queue
+//Returns 1 if there's no issue.
+//Returns 0 otherwise.
 bool dequeue_tetrimino(tetrimino_t **queue);
+
+//Remove and free all tetrimino of the queue
+//Returns 1 if there's no issue.
+//Returns 0 otherwise.
 bool empty_queue(tetrimino_t **queue);
 
+//Refresh the display str of the given structure
 void update_lambda_comp(frame_component_t *component);
 void update_score(game_data_t *game_data);
 void update_timer(frame_component_t *frame);
@@ -235,22 +252,28 @@ void update_timer(frame_component_t *frame);
 ** ****************
 */
 
+//Displays tetrimino with relative position to board pos
 void display_tetrimino(tetrimino_t *tetrimino, pos_t board_pos, pos_t pos);
 
+//Displays the shadow of the actual tetrimino
 void display_shadow(game_data_t *game_data, tetrimino_t *queue,
                             option_t options, pos_t board_pos);
 
+//Displays a board componed of char and color
 void display_board(cell_t **board, dimensions_t size, pos_t pos);
 
+//Displays a frame with relative position to board pos
 void display_frame(frame_t frame, pos_t middle_pos, dimensions_t midde_size);
 
+//Displays next tetrimino in the right panel
 void display_next_tetrimino(tetrimino_t *queue, frame_t frame,
                             pos_t middle_pos, dimensions_t midde_size);
 
+//Call every display functions
 void display_all(game_data_t *game_data, tetrimino_t *queue,
                                             option_t options,
                                             pos_t board_pos);
-
+//Main game function
 int game(option_t options, tetrimino_t **tetrimino_list);
 
 void parse_input(game_data_t *game_data, tetrimino_t **queue,
