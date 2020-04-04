@@ -28,13 +28,13 @@ static void break_line(game_data_t *data, dimensions_t size, size_t y)
     size_t space = sizeof(cell_t);
 
     while (y > 0) {
-        for (x = 1; x < size.width + 1; x += 1)
+        for (x = 1; x < size.width + 1; x += 1) {
             my_memcpy(data->board[y] + x, data->board[y - 1] + x, space);
+        }
         y -= 1;
     }
-    while (x < size.width + 1) {
+    for (x = 1; x < size.width + 1; x += 1) {
         my_memcpy(data->board[1] + x, &empty_cell, space);
-        x += 1;
     }
 }
 
