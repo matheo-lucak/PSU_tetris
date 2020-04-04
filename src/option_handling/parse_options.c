@@ -17,8 +17,8 @@ bool parse_option(const int ac, char * const av[], option_t *options)
     int check = 0;
     int index = 0;
 
-    if (!av)
-        return (84);
+    if (!av || !options)
+        return (false);
     do {
         check = getopt_long(ac, av, "L:l:r:t:d:q:p:s:wD",
                             option_template, NULL);
