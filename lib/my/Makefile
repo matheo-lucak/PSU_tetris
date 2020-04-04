@@ -8,6 +8,8 @@
 SRC	=			./my_putchar.c						\
 				./my_isnum.c						\
 				./my_str_is_num.c					\
+				./my_is_lowercase.c					\
+				./my_is_uppercase.c					\
 				./my_isalpha.c						\
 				./my_isalphanum.c					\
 				./my_str_is_alphanum.c				\
@@ -39,6 +41,7 @@ SRC	=			./my_putchar.c						\
 				./my_strncmp.c						\
 				./my_strdup.c						\
 				./my_strndup.c						\
+				./my_strdup_lowercase.c				\
 				./my_strdup_char.c					\
 				./my_strdup_cmpstr.c				\
 				./my_strcat.c						\
@@ -52,7 +55,7 @@ SRC	=			./my_putchar.c						\
 				./my_memcpy.c						\
 				./my_absolute_getnbr.c				\
 				./my_skip_a_file_line.c				\
-				./my_get_randnb.c
+				./my_get_randnb.c					\
 
 SRCMYPRINTF	=	./my_printf/my_printf.c				\
 				./my_printf/flag_checkers.c			\
@@ -65,7 +68,7 @@ SRCMYPRINTF	=	./my_printf/my_printf.c				\
 				./my_printf/redirect_lower_upper.c	\
 				./my_printf/redirect_hashtag.c		\
 				./my_printf/redirect_add_ptr.c		\
-				./my_printf/my_flag_cmp.c
+				./my_printf/my_flag_cmp.c			\
 
 CFLAGS		=	-Wall -Wextra
 

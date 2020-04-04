@@ -9,8 +9,9 @@ int my_arrlen(char **array)
 {
     int i = 0;
 
-    if (array)
+    if (array) {
         while (array[i])
             i += 1;
+    }
     return (i);
 }

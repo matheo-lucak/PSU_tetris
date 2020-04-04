@@ -94,10 +94,9 @@ static bool fill_shape(const int fd, tetrimino_t *node)
         return (false);
     for (index = 0; index < (size_t)node->alloc_size; index += 1) {
         line = get_next_line(fd);
-        if (!line)
-            return (false);
         my_strcpychar(node->shapes[UPSIDE][index], line, '*');
-        free(line);
+        if (line)
+            free(line);
     }
     return (true);
 }

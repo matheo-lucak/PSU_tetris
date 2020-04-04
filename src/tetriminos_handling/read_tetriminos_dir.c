@@ -66,5 +66,5 @@ bool read_tetriminos_dir(tetrimino_t **head)
         }
     }
     closedir(dir);
-    return (*head) ? true : false;
+    return (true);
 }

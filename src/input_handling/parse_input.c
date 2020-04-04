@@ -21,11 +21,18 @@ static void control_tetrimino(game_data_t *game_data, tetrimino_t **queue,
 static void control_game_event(game_data_t *game_data, option_t options,
                                                             int key_code)
 {
-    if (key_code == KEY_CODE_QUIT) {
+    int pause_key = options.option_keys[KEY_CODE_PAUSE];
+    int quit_key = options.option_keys[KEY_CODE_QUIT];
+    int c = 0;
+
+    if (key_code == KEY_CODE_QUIT)
         game_data->quit = true;
-    }
     if (key_code == KEY_CODE_PAUSE) {
-        while (getch() != options.option_keys[KEY_CODE_PAUSE]);
+        do {
+            c = getch();
+        } while (c != pause_key && c != quit_key);
+        if (c == quit_key)
+            game_data->quit = true;
     }
 }
 

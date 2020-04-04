@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "tetris_special_keys.h": "c",
+        "mysqlstubs.h": "c",
+        "tetris.h": "c",
+        "typeinfo": "c",
+        "my.h": "c"
+    }
+}

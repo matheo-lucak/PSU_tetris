@@ -10,6 +10,10 @@ MAIN				=	src/main.c										\
 SRC					=	src/tetris.c									\
 						src/debug_mode/get_tetriminos_nb.c				\
 						src/debug_mode/print_prog_stats.c				\
+						src/debug_mode/print_tetrimino_shape.c			\
+						src/debug_mode/print_tetrimino_list.c			\
+						src/debug_mode/is_tetri_list_sorted.c			\
+						src/debug_mode/sort_tetrimino_list.c			\
 						src/freeer/free_frame.c							\
 						src/freeer/free_game_data.c						\
 						src/game_handling/break_line.c					\
@@ -49,6 +53,9 @@ SRC					=	src/tetris.c									\
 						src/tetriminos_handling/tetriminos_utils.c		\
 
 SRC_TESTS			=	tests/test_file_extension_determ.c				\
+						tests/test_is_list_sorted.c						\
+
+SRC_LIBTESTS		=	tests/tests_libmy/test_my_strdup_lowercase.c	\
 
 OBJ					=	$(MAIN:.c=.o) $(SRC:.c=.o)
 
@@ -79,7 +86,7 @@ debug:					clean $(LIB) $(OBJ)
 tests_run:				LDLIBS += -lcriterion --coverage
 tests_run:				CFLAGS += --coverage
 tests_run:				$(LIB)
-						$(CC) -o $@ $(SRC) tests/* $(CPPFLAGS) $(LDFLAGS) $(LDLIBS)
+						$(CC) -o $@ $(SRC) tests/*.c $(SRC_LIBTESTS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS)
 						./$@
 						mv *.gc* tests/
 						$(RM) $@

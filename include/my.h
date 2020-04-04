@@ -23,6 +23,8 @@ int my_putstr(const char *str);
 int my_absolute_getnbr(const char *str);
 int my_getnbr(const char *str);
 
+bool my_is_lowercase(const char c);
+bool my_is_uppercase(const char c);
 int my_isalpha(const char c);
 int my_isnum(const char c);
 int my_str_is_num(const char *str);
@@ -68,6 +70,7 @@ void my_free_arr(void **array);
 
 char *my_strdup(const char *template);
 char *my_strndup(const char *template, int n);
+char *my_strdup_lowercase(const char *template);
 char *my_strdup_char(const char *template, const char c);
 char *my_strdup_cmpstr(const char *template, const char cmp[]);
 bool my_mass_strcmp(const char *template, ...);
