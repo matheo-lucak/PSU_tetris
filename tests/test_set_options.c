@@ -28,7 +28,7 @@ Test(set_options, control_key_wrong_option)
 {
     option_t option;
 
-    cr_assert(!set_control_key(&option, 'a', ";)"));
+    cr_assert(!set_control_key(&option, 'a', "))"));
 }
 
 Test(set_options, control_key_success)
@@ -54,19 +54,19 @@ Test(set_options, option_key_wrong_option)
 {
     option_t option;
 
-    cr_assert(!set_option_key(&option, 'l', ";)"));
+    cr_assert(!set_option_key(&option, 'l', "))"));
 }
 
 Test(set_options, option_key_success)
 {
     option_t option;
 
-    cr_assert(set_option_key(&option, 'q', ";)"));
+    cr_assert(set_option_key(&option, 'q', "))"));
 }
 
 Test(set_options, level_option_fail_1)
 {
-    cr_assert(!set_level(NULL, 'q', ";)"));
+    cr_assert(!set_level(NULL, 'q', "))"));
 }
 
 Test(set_options, level_option_fail_2)

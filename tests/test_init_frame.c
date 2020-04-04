@@ -26,3 +26,39 @@ Test(init_frame, success_1)
                 frame.pos.x == level_template.pos.x &&
                 frame.pos.y == level_template.pos.y);
 }
+
+Test(init_frame, special_frame_1_fail)
+{
+    option_t options;
+
+    my_memset((char *)&options, 0, sizeof(option_t));
+    cr_assert(!init_left_pannel(NULL, options));
+}
+
+Test(init_frame, special_frame_1_success)
+{
+    frame_t frame;
+    option_t options;
+
+    my_memset((char *)&options, 0, sizeof(option_t));
+    my_memset((char *)&frame, 0, sizeof(frame_t));
+    cr_assert(init_left_pannel(&frame, options));
+}
+
+Test(init_frame, special_frame_2_fail)
+{
+    option_t options;
+
+    my_memset((char *)&options, 0, sizeof(option_t));
+    cr_assert(!init_right_pannel(NULL, options));
+}
+
+Test(init_frame, special_frame_2_success)
+{
+    frame_t frame;
+    option_t options;
+
+    my_memset((char *)&options, 0, sizeof(option_t));
+    my_memset((char *)&frame, 0, sizeof(frame_t));
+    cr_assert(init_right_pannel(&frame, options));
+}
