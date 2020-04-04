@@ -36,7 +36,7 @@ void move_tetrimino(game_data_t *game_data, option_t options,
     pos_t pos = game_data->cursor;
 
     if (!tetrimino)
-        return ;
+        return;
     if (key_code == KEY_CODE_LEFT &&
         !tetrimino_collide(game_data, options,
                             tetrimino->shapes[tetrimino->rotation],

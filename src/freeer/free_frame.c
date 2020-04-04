@@ -25,9 +25,8 @@ bool free_frame(frame_t frame)
     if (frame.board)
         my_free_arr((void **)frame.board);
     if (frame.components) {
-        for (index = 0; index < frame.component_nb; index += 1) {
+        for (index = 0; index < frame.component_nb; index += 1)
             free_frame_component(frame.components[index]);
-        }
         free(frame.components);
     }
     return (true);

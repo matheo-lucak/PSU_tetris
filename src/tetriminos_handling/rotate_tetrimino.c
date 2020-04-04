@@ -10,7 +10,7 @@
 #include "tetris.h"
 
 static bool init_oriented_shape(tetrimino_t *tetrimino,
-                                    unsigned short orientation)
+                                unsigned short orientation)
 {
     char **new_shape = NULL;
     register size_t alloc_size = 0;

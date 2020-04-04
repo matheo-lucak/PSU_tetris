@@ -8,13 +8,13 @@
 #include "tetris.h"
 
 void display_shadow(game_data_t *game_data, tetrimino_t *queue,
-                            option_t options, pos_t board_pos)
+                    option_t options, pos_t board_pos)
 {
     pos_t pos = game_data->cursor;
     size_t save_color = 0;
 
     if (!queue)
-        return ;
+        return;
     save_color = queue->color;
     queue->color = COLOR_WHITE;
     while (!tetrimino_collide(game_data, options,

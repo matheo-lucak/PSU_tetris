@@ -8,8 +8,7 @@
 #include "tetris.h"
 
 void display_all(game_data_t *game_data, tetrimino_t *queue,
-                                            option_t options,
-                                            pos_t board_pos)
+                option_t options, pos_t board_pos)
 {
     display_board(game_data->board, options.map_size, board_pos);
     display_frame(game_data->left_panel, board_pos, options.map_size);
@@ -18,7 +17,6 @@ void display_all(game_data_t *game_data, tetrimino_t *queue,
     if (!(options.game_option & NO_NEXT)) {
         display_frame(game_data->right_panel, board_pos, options.map_size);
         display_next_tetrimino(queue, game_data->right_panel,
-                                                board_pos,
-                                                options.map_size);
+                                board_pos, options.map_size);
     }
 }

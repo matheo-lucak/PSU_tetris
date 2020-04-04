@@ -19,7 +19,7 @@ static void control_tetrimino(game_data_t *game_data, tetrimino_t **queue,
 }
 
 static void control_game_event(game_data_t *game_data, option_t options,
-                                                            int key_code)
+                                int key_code)
 {
     int pause_key = options.option_keys[KEY_CODE_PAUSE];
     int quit_key = options.option_keys[KEY_CODE_QUIT];
@@ -36,8 +36,7 @@ static void control_game_event(game_data_t *game_data, option_t options,
     }
 }
 
-void parse_input(game_data_t *game_data, tetrimino_t **queue,
-                                                option_t options)
+void parse_input(game_data_t *game_data, tetrimino_t **queue, option_t options)
 {
     register size_t index = 0;
     int input = getch();

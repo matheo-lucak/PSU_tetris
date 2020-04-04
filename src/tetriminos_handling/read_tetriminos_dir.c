@@ -52,6 +52,18 @@ static bool add_first_tetrimino(tetrimino_t **head, const char file_name[])
     return (true);
 }
 
+static bool add_new_tetri_to_list(tetrimino_t **head, char entire_file_name[])
+{
+    if (!(*head)) {
+        if (!add_first_tetrimino(head, entire_file_name))
+            return (false);
+    } else {
+        if (!add_tetrimino(head, entire_file_name))
+            return (false);
+    }
+    return (true);
+}
+
 bool read_tetriminos_dir(tetrimino_t **head)
 {
     struct dirent *dir_stat = NULL;
@@ -65,13 +77,8 @@ bool read_tetriminos_dir(tetrimino_t **head)
     for (dir_stat = readdir(dir); dir_stat; dir_stat = readdir(dir)) {
         if (!file_extension_determ(dir_stat->d_name, ".tetrimino"))
             continue;
-        if (!(*head)) {
-            if (!add_first_tetrimino(head, dir_stat->d_name))
-                return (false);
-        } else {
-            if (!add_tetrimino(head, dir_stat->d_name))
-                return (false);
-        }
+        if (!add_new_tetri_to_list(head, dir_stat->d_name))
+            return (false);
     }
     closedir(dir);
     return (true);

@@ -48,26 +48,33 @@ static void free_tmps(char *tmp_first, char *tmp_second)
         free(tmp_second);
 }
 
+static void rearrange_ascii_order(tetrimino_t **head, tetrimino_t *tmp,
+                                    char **tmp_first, char **tmp_second)
+{
+    int cmp_ascii_order = 0;
+
+    reset_pointers_values(tmp, tmp_first, tmp_second, &cmp_ascii_order);
+    if (cmp_ascii_order > 0)
+        swap_tetrimino_nodes(head, tmp->prev, tmp);
+    else if (cmp_ascii_order == 0) {
+        cmp_ascii_order = my_strcmp(tmp->prev->name, tmp->name);
+        if (cmp_ascii_order > 0)
+            swap_tetrimino_nodes(head, tmp->prev, tmp);
+    }
+}
+
 void sort_tetrimino_list(tetrimino_t **head)
 {
     tetrimino_t *tmp = NULL;
     char *tmp_first = NULL;
     char *tmp_second = NULL;
-    int cmp_reason = 0;
 
     if (!head || !(*head) || (*head) == (*head)->next)
         return;
     for (tmp = (*head)->next; !is_list_sorted(head); tmp = tmp->next) {
         if (tmp == (*head))
             tmp = tmp->next;
-        reset_pointers_values(tmp, &tmp_first, &tmp_second, &cmp_reason);
-        if (cmp_reason > 0)
-            swap_tetrimino_nodes(head, tmp->prev, tmp);
-        else if (cmp_reason == 0) {
-            cmp_reason = my_strcmp(tmp->prev->name, tmp->name);
-            if (cmp_reason > 0)
-                swap_tetrimino_nodes(head, tmp->prev, tmp);
-        }
+        rearrange_ascii_order(head, tmp, &tmp_first, &tmp_second);
         free_tmps(tmp_first, tmp_second);
     }
 }
