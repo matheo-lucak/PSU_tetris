@@ -147,6 +147,8 @@ bool read_tetriminos_dir(tetrimino_t **head);
 //Returns 0 otherwise.
 void get_tetrimino(tetrimino_t *node, const char file_name[]);
 
+bool fill_shape(const int fd, tetrimino_t *node);
+
 char **get_blank_tetrimino(size_t alloc_size);
 
 size_t get_tetriminos_height(tetrimino_t *tetrimino);
@@ -228,9 +230,9 @@ void update_timer(frame_component_t *frame);
 
 
 /*
-** ******************
-** | Display func ! |
-** ******************
+** ****************
+** | Display func |
+** ****************
 */
 
 void display_tetrimino(tetrimino_t *tetrimino, pos_t board_pos, pos_t pos);
@@ -255,9 +257,9 @@ void parse_input(game_data_t *game_data, tetrimino_t **queue,
                                                 option_t options);
 
 /*
-** ************************
-** | Control Tetriminos ! |
-** ************************
+** **********************
+** | Control Tetriminos |
+** **********************
 */
 
 void move_tetrimino(game_data_t *game_data, option_t options,

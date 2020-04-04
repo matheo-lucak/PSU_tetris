@@ -27,25 +27,33 @@ static void reset_pointers_values(tetrimino_t *tmp, char **tmp_first,
     *cmp_reason = my_strcmp(*tmp_first, *tmp_second);
 }
 
+static bool treat_ascii_order(tetrimino_t *tmp, char *tmp_first,
+                            char *tmp_second, int *cmp_ascii_order)
+{
+    if ((*cmp_ascii_order) > 0)
+        return (free_check_list_resources(tmp_first, tmp_second, 0));
+    if ((*cmp_ascii_order) == 0) {
+        *cmp_ascii_order = my_strcmp(tmp->prev->name, tmp->name);
+        if ((*cmp_ascii_order) > 0)
+            return (free_check_list_resources(tmp_first, tmp_second, 0));
+    }
+    return (1);
+}
+
 bool is_list_sorted(tetrimino_t **head)
 {
     tetrimino_t *tmp = NULL;
     char *tmp_first = NULL;
     char *tmp_second = NULL;
-    int cmp_reason = 0;
+    int cmp_ascii_order = 0;
 
     if (!head || !(*head))
         return (true);
     tmp = (*head)->next;
     do {
-        reset_pointers_values(tmp, &tmp_first, &tmp_second, &cmp_reason);
-        if (cmp_reason > 0)
-            return (free_check_list_resources(tmp_first, tmp_second, 0));
-        if (cmp_reason == 0) {
-            cmp_reason = my_strcmp(tmp->prev->name, tmp->name);
-            if (cmp_reason > 0)
-                return (free_check_list_resources(tmp_first, tmp_second, 0));
-        }
+        reset_pointers_values(tmp, &tmp_first, &tmp_second, &cmp_ascii_order);
+        if (!treat_ascii_order(tmp, tmp_first, tmp_second, &cmp_ascii_order))
+            return (false);
         tmp = tmp->next;
         free_check_list_resources(tmp_first, tmp_second, 1);
     } while (tmp != (*head));

@@ -20,6 +20,10 @@ static bool add_tetrimino(tetrimino_t **head, const char file_name[])
     node = malloc(sizeof(tetrimino_t));
     if (!node)
         return (false);
+    *node = (tetrimino_t){.shapes = {NULL, NULL, NULL, NULL},
+            .name = NULL, .alloc_size = 0, .color = 0,
+            .error = false, .rotation = 0, .dims = {0, 0},
+            .next = NULL, .prev = NULL};
     get_tetrimino(node, file_name);
     node->next = *head;
     node->prev = (*head)->prev;
@@ -37,6 +41,10 @@ static bool add_first_tetrimino(tetrimino_t **head, const char file_name[])
     node = malloc(sizeof(tetrimino_t));
     if (!node)
         return (false);
+    *node = (tetrimino_t){.shapes = {NULL, NULL, NULL, NULL},
+            .name = NULL, .alloc_size = 0, .color = 0,
+            .error = false, .rotation = 0, .dims = {0, 0},
+            .next = NULL, .prev = NULL};
     get_tetrimino(node, file_name);
     node->next = node;
     node->prev = node;

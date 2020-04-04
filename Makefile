@@ -51,6 +51,7 @@ SRC					=	src/tetris.c									\
 						src/tetriminos_handling/read_tetriminos_dir.c	\
 						src/tetriminos_handling/rotate_tetrimino.c		\
 						src/tetriminos_handling/tetriminos_utils.c		\
+						src/tetriminos_handling/fill_tetri_shape.c		\
 
 SRC_TESTS			=	tests/test_file_extension_determ.c				\
 						tests/test_is_list_sorted.c						\
