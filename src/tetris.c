@@ -20,14 +20,18 @@ static void set_default_options(option_t *options)
 
 static bool check_for_input(void)
 {
-    char *input = NULL;
+    char input[1];
 
     my_putstr("Press any key to start Tetris\n");
-    input = get_next_line(0);
-    if (!input)
+    if (read(0, input, 1) != 1)
         return (false);
-    free(input);
     return (true);
+}
+
+static int free_resources_and_quit(tetrimino_t *list, const int return_val)
+{
+    free_tetriminos_list(list);
+    return (return_val);
 }
 
 int tetris(const int ac, char * const av[])
@@ -44,7 +48,7 @@ int tetris(const int ac, char * const av[])
     if (options.game_option & DEBUG) {
         print_prog_stats(&tetrimino_list, options);
         if (!check_for_input())
-            return (0);
+            return (free_resources_and_quit(tetrimino_list, 0));
     }
     game_return_value = game(options, &tetrimino_list);
     free_tetriminos_list(tetrimino_list);

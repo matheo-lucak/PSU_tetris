@@ -33,7 +33,7 @@ static bool should_update_game(game_data_t *game_data)
 }
 
 static bool run_game(game_data_t *game_data, option_t options,
-                                        tetrimino_t *tetrimino_list)
+                        tetrimino_t *tetrimino_list)
 {
     pos_t board_pos = compute_board_position(options);
     static tetrimino_t *queue = NULL;
