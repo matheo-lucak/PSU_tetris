@@ -22,7 +22,7 @@ size_t number_tetrimino(tetrimino_t *tetrimino_list)
     return (index);
 }
 
-tetrimino_t *get_n_tetrimino(tetrimino_t *tetrimino_list, size_t n)
+tetrimino_t *get_n_tetrimino(tetrimino_t *tetrimino_list, const size_t n)
 {
     tetrimino_t *tmp = NULL;
     register size_t index = 0;
