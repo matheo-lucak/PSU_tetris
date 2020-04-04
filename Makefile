@@ -92,6 +92,10 @@ tests_run:				$(LIB)
 						mv *.gc* tests/
 						$(RM) $@
 
+coverage:
+						gcovr --exclude ./tests/
+						gcovr --exclude ./tests/ --branches
+
 clean:
 						$(RM) $(OBJ)
 						$(MAKE) -C lib/my clean
