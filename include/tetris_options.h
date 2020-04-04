@@ -8,6 +8,7 @@
 #ifndef TETRIS_OPTIONS_H_
 #define TETRIS_OPTIONS_H_
 
+#include <getopt.h>
 #include <stdbool.h>
 #include "tetris.h"
 
