@@ -60,8 +60,8 @@ bool set_map_size(option_t *options, char option, char *arg)
     }
     tmp_width = my_absolute_getnbr(parsed_input[0]);
     tmp_height = my_absolute_getnbr(parsed_input[1]);
+    my_free_arr((void **)parsed_input);
     if (tmp_width <= 0 || tmp_height <= 0) {
-        my_free_arr((void **)parsed_input);
         return (false);
     }
     options->map_size.width = (size_t)tmp_width;
@@ -74,7 +74,7 @@ bool set_game_option(option_t *options, char option,
 {
     int index = 0;
 
-    if (!option)
+    if (!options)
         return (false);
     index = find_char("Dw", option);
     if (index == -1)

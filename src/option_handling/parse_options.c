@@ -5,7 +5,6 @@
 ** parse_options
 */
 
-#include <getopt.h>
 #include "my.h"
 #include "tetris_options.h"
 

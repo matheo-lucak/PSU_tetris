@@ -7,7 +7,6 @@
 
 #include <criterion/criterion.h>
 #include "tetris.h"
-
 #include "my.h"
 
 Test(queue_tests, dequeue_fail)
