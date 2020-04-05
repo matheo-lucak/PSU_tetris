@@ -30,7 +30,7 @@ bool set_option_key(option_t *options, char option, char *arg)
     index = find_char("qp", option);
     if (index == -1)
         return (false);
-    options->control_keys[index] = arg[0];
+    options->option_keys[index] = arg[0];
     return (true);
 }
 
