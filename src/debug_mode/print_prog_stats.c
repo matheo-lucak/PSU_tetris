@@ -48,8 +48,8 @@ void print_prog_stats(tetrimino_t **head, const option_t opt)
 {
     my_putstr("*** DEBUG MODE ***\n");
     print_selected_keys(opt.control_keys, opt.option_keys);
-    my_putstr(opt.game_option & NO_NEXT ? "Next = No\n" : "Next = Yes\n");
-    my_printf("Level = %u\n", opt.level);
+    my_putstr(opt.game_option & NO_NEXT ? "Next : No\n" : "Next : Yes\n");
+    my_printf("Level : %u\n", opt.level);
     my_printf("Size : %lu*%lu\n", opt.map_size.width, opt.map_size.height);
     my_printf("Tetriminos: %lu\n", get_tetriminos_nb(head));
     sort_tetrimino_list(head);
