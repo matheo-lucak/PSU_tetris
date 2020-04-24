@@ -21,7 +21,7 @@ bool parse_option(const int ac, char * const av[], option_t *options)
         return (false);
     do {
         check = getopt_long(ac, av, "L:l:r:t:d:q:p:s:wD",
-                            option_template, NULL);
+                                    option_template, NULL);
         index = find_char("LlrtdqpswD", check);
         if (index == -1)
             continue;

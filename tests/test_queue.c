@@ -72,7 +72,6 @@ Test(queue_tests, enqueue_success_one_tetri)
     cr_assert(enqueue_tetrimino(&queue, tetri));
 }
 
-
 Test(queue_tests, enqueue_success_two_tetri)
 {
     tetrimino_t *queue = NULL;
